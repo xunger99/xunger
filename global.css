@@ -1,0 +1,247 @@
+body {
+	text-align: justify;
+/*	background-color: #EFF8FB; /*url(background.jpg);*/
+	color: #111;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 0.9em;
+	width: 900px;
+}
+
+#header {
+	width: 100%;
+	text-align: left;
+}
+
+#page-wrap { 
+  width: 600px; 
+  margin: 15px auto; 
+  position: relative; 
+}
+
+
+
+#sidebar {
+	position: fixed; 
+/*	background-color: #EFF8FB; /*#fffeec;*/
+	float: left;
+	width: 11%;
+	padding: 2px 1%;
+	margin: 2px 0% 2px 0%;
+	margin-top: 20%;	
+	margin-left: 0%;
+/*  border-style: solid;
+	border-width: 1px;
+	border-color: #ead388;*/
+	font-size: 0.8em;
+	text-align: left;
+	clear: both;
+}
+
+#main {
+/*	background-color: #EFF8FB; /*#fffeec;*/
+	float: right;
+	width: 75%;
+	padding: 5px 2%;
+	margin: 10px 10px 10px 20px;
+/*	border-style: solid;
+	border-width: 1px;
+	border-color: #ead388;*/
+	text-align: justify;
+}
+
+#footer {
+	text-align: left;
+	clear: both;
+	font-size: 0.8em;
+}
+
+/* =============== */
+/* = Link styles = */
+/* =============== */
+a:link, a:visited, a:hover {
+	color: #336699;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+#header a:link, #header a:visited, #header a:hover {
+	color: #333;
+	text-decoration: none;
+}
+
+#header a:hover{
+	color: #336699;
+}
+
+#navigation a {
+	color: #FF6600;
+	text-decoration: none;
+}
+
+#navigation a:hover {
+	color: #336699;
+}
+
+.Owner a, .Owner a:visited, .Owner a:hover {
+	color: #9900FF;
+	text-decoration: none;
+}
+
+.Owner a:hover {
+	text-decoration: underline;
+}
+
+.Message {
+	color: #9900FF;
+}
+
+/* padding values:
+	top, right, bottom, left
+*/
+
+/* ========== */
+/* = Header = */
+/* ========== */
+
+#header .picture1 {
+	float: left;
+		width: 13%;
+	padding: 0px 0px 0 0px;
+}
+
+
+#header .picture {
+	float: left;
+	padding: 70px 0 20px 10px;
+	
+}
+
+#header .block {
+	float: left;
+	width: 70%;
+	padding: 0px 0 0 30px;
+}
+
+#header .pu_logo {
+	float: center;
+	border: 0;
+	padding-top: 0px;
+	padding-right: 20%;
+}
+
+#header h1 {
+	font-size: 1.5em;
+	font-weight: bold;
+	padding-bottom: 0px;
+}
+
+#header p { margin: 0; }
+
+#header ul {
+	list-style: none;
+	padding: 0;
+}
+
+#header li { padding: 10px 0 0 0; }
+
+/* =========== */
+/* = Sidebar = */
+/* =========== */
+
+
+
+/*#sidebar li a {
+    display: block;
+    background-color: #EFF8FB;
+}*/
+
+
+#sidebar ul {
+	list-style: none;
+	padding: 0;
+	padding-bottom: 00px;	
+	margin: 0px 0 0 0;
+}
+
+#navigation {
+	font-size: 1.6em;
+	padding-bottom: 800px;		
+	margin: 0 0 100px 0;
+	text-align: center;
+}
+
+#navigation ul {
+	list-style: none;
+	padding: 0;
+	margin: 100px 0px 0px 0px;
+}
+
+#navigation ul li {
+	padding: 5px 0;
+	margin: 5px 0;
+}
+
+/* ======== */
+/* = Main = */
+/* ======== */
+
+#main p {
+	text-align: justify;
+}
+
+#main h3 {
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+#main ul {
+	margin: 5px 0 10px 0;
+}
+
+/* ================ */
+/* = Publications = */
+/* ================ */
+
+.Pub, .Talk, .Poster {
+	text-align: left;
+	line-height: 125%;
+	page-break-before: always;
+	padding-bottom: 0.8em; }
+
+.Pub ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px 10px;
+}
+
+.Pub h4 {
+	color: #FF6600;
+	margin: 0px;
+	padding: 10px 0 0 0;
+}
+
+.Pub li {
+	padding: 5px 0 10px 0;
+}
+
+
+.Pub .Title { font-weight: bolder;
+	color: #0000FF; }
+
+.Pub .Author { color: black; }
+
+.Pub .Journal, .Pub .Conference { font-style: italic; }
+
+.Pub .Volume { font-weight: bolder; }
+
+.Pub .Number { color: black; }
+
+.Pub .Year { color: black; }
+
+.Pub .Heading {
+	color: #FF6600;
+	font-weight: bold;
+}
