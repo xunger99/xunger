@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>    
+    <title>Xunger@PKU</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="load.css">
+    <link rel="stylesheet" href="global.css">
+    <style>
+        ul.nomarker {
+          list-style: none;
+          margin: auto;
+          padding: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <DIV id=mw-page-base class=noprint></DIV>
+        <DIV id=mw-head-base class=noprint></DIV>
+        <div id="content" class="mw-body" role="main">
+            <div id="main">
+                <h2>模拟电路实验（一） 示波器的使用与简易传声器电路</h2>
+                <h3>实验目的</h3>
+                <ol>
+                    <li>了解示波器的示波原理和使用方法，掌握基本物理量的测量方法和技术，提高规范操作和复原能力；</li>
+                    <li>了解常见驻极体传声器的工作原理，搭建简易传声器电路；</li>
+                    <li>使用搭建的简易传声器测量单频声，并运用示波器的FFT功能观察频域。</li>
+                </ol>
+                <h3>预习材料</h3>
+                <ol>
+                    <li>驻极体传声器元件的内部结构，及简易传声器电路的工作原理：<a href="https://zhuanlan.zhihu.com/p/515379352">小白说传感器篇——驻极体麦克风 - 知乎 (zhihu.com)</a></li>
+                    <li>金属氧化物半导体场效应管（MOSFET）的微观构造及其作为放大器时的工作原理：<a href="https://zhuanlan.zhihu.com/p/559132103">mos管基本放大电路是什么 - 知乎 (zhihu.com)</a></li>
+                    <li>示波器的使用方法：<a href="https://www.bilibili.com/video/BV1K44y147LK/">示波器那么重要，你确定不进来看看？</a></li>
+                </ol>
+                <h3>实验器材</h3>
+                面包板1个，示波器1台，万用表1个，信号发声器一台，传声器1个，USB线缆1条，USB母口1个，杜邦线若干，多种规格的电阻若干，多种规格的电容若干。
+                <h3>实验步骤</h3>
+                <ol>
+                    <li>参考电路原理图在面包板上搭建简易传声器电路；<br>
+                        <figure>
+                            <img src="/images/ana1.png" class="fans" width="500">
+                            <figcaption>简易传声器电路原理图</figcaption>
+                        </figure>
+                    </li>
+                    <li>用手机播放提供的<a href="/download_file/sound.zip" download>单频声</a>，将手机扬声器开孔靠近传声器元件，然后使用示波器测试测量点的对地电压，观察简易传声器电路输出信号的时域特征，判断其是否与输入声信号吻合；</li>
+                    <li>使用示波器的数学功能，通过快速傅里叶变换（FFT）分析简易传声器电路输出信号的频域特征，判断其是否与输入声信号吻合。</li>
+                </ol>
+                
+                <h3>思考题</h3>
+                <ol>
+                    <li>说明当上拉电阻过大或过小时获得的信号会受到怎样的影响。</li>
+                </ol>
+
+                <h3>考核要求</h3>
+                于1周内提交实验报告，内容包括所搭建的电路图片、测试时示波器上显示的时域、频域信号、思考题解答。
+
+
+                <h3>实验索引</h3>
+                <ul class="nomarker">
+                    <li><a href="https://xunger99.github.io/xunger/ana1">模拟电路实验（一）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana2">模拟电路实验（二）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana3">模拟电路实验（三）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana4">模拟电路实验（四）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig1">数字电路实验（一）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig2">数字电路实验（二）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig3">数字电路实验（三）</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <DIV id=mw-navigation>
+            <H2>Navigation menu</H2>
+            <DIV id=mw-head>
+
+                <DIV id=left-navigation>
+                    <DIV id=p-namespaces class=vectorTabs role=navigation aria-labelledby=p-namespaces-label>
+                        <DIV class=menu>
+                            <UL></UL>
+                        </DIV>
+                    </DIV>
+                </DIV>
+
+                <DIV id=p-cactions class="vectorMenu emptyPortlet" role=navigation aria-labelledby=p-cactions-label>
+                    <DIV class=menu>
+                        <UL></UL>
+                    </DIV>
+                </DIV>
+
+            </DIV>
+        </DIV>
+        
+        
+        
+        <DIV id=mw-panel>
+            <DIV id=p-lang class=portal role=navigation aria-labelledby=p-lang-label>
+                <DIV id=p-logo role=banner></DIV>
+                <DIV id=p-navigation class=portal role=navigation aria-labelledby=p-navigation-label>
+                    <H3 id=p-navigation-label>Navigation</H3>
+                    <DIV class=body>
+                    <UL>
+                        <li><a href="https://xunger99.github.io/xunger/">English</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/papers.htm">Publication</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/chinese.htm">简介</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/group.htm">人才培养</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/aaero.htm">教学资源-气动声学</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/acontrol.htm">教学资源-主动控制</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/control.htm">教学资源-控制原理</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/ee.htm">教学资源-电路电子</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/flight.htm">教学资源-飞行控制</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/caa.htm">教学资源-CAA</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/sat.htm">教学资源-卫星初步</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/undergrad.htm">教学资源-本科科研</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/outcome.htm">科研成果科普</a></li>
+                    </UL>
+                    </DIV>
+                </DIV>
+        
+                <DIV id=p-lang class=portal role=navigation aria-labelledby=p-lang-label>
+            </DIV>
+        </DIV>
+    </div>
+
+    <DIV id=footer role=contentinfo>
+        <UL id=footer-info>
+            <LI id=footer-info-lastmod> </LI>
+        </UL>
+    </DIV>
+</body>
+</html>

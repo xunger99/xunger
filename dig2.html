@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>    
+    <title>Xunger@PKU</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="load.css">
+    <link rel="stylesheet" href="global.css">
+    <style>
+        ul.nomarker {
+          list-style: none;
+          margin: auto;
+          padding: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <DIV id=mw-page-base class=noprint></DIV>
+        <DIV id=mw-head-base class=noprint></DIV>
+        <div id="content" class="mw-body" role="main">
+            <div id="main">
+                <h2>数字电路实验（二） FPGA中IP核的使用</h2>
+                <h3>实验目的</h3>
+                <ol>
+                    <li>了解RAM/ROM IP核的概念并掌握基本读写方法；</li>
+                    <li>以VGA视频编码格式为例，了解FPGA的使用范围；</li>
+                    <li>根据提示修改代码，实现VGA视频输出中图片的旋转和移动等功能，在此过程中进一步了解时序逻辑。</li>
+                </ol>
+                <h3>预习材料</h3>
+                <ol>
+                    <li>RAM/ROM IP核（知识产权核）的概念、基本读写方法：<a href="https://zhuanlan.zhihu.com/p/346070667">基于IP核的FPGA设计 - 知乎 (zhihu.com)</a></li>
+                    <li>VGA视频编码原理：<a href="https://www.cnblogs.com/liujinggang/p/9690504.html">VGA接口原理与Verilog实现 - 博客园</a></li>
+                </ol>
+                <h3>实验器材</h3>
+                Basys 2开发板，笔记本电脑1台（提前安装Xilinx ISE 14.7），<a href="/download_file/dig2.zip">附件</a>。
+                <h3>实验步骤</h3>
+                <ol>
+                    <li>建立并调用RAM IP核，修改Memory Type为 Single Port RAM，修改位宽为8，深度为32，模式为Write First；</li>
+                    <li>建立仿真文件，并在ISE中运行仿真程序；</li>
+                    <li>查看仿真时序结果；<br>
+                        <figure>
+                            <img src="/images/dig2_1.png" class="fans" width="500">
+                            <figcaption>仿真结果中，读数据比写数据晚一个时钟，这与之前的设置有关，可以尝试改为Read First，再仿真一次并观察结果</figcaption>
+                        </figure>
+                    </li>
+                    <li>建立ROM IP核，修改Memory Type为 Single Port ROM，修改位宽为8，深度为4096，Memory Initialization选择从附件中coe文件加载（路径不能含有中文）；</li>
+                    <li>将电脑连接到FPGA开发板，导入附件中的顶层文件、约束文件，实例化IP核；</li>
+                    <li>将开发板的视频输出接口与显示器相连，在屏幕上输出箭头图案。<br>
+                        <figure>
+                            <img src="/images/dig2_2.jpg" class="fans" width="500">
+                            <figcaption>写在coe文件中的箭头图案经开发板输出到显示器上</figcaption>
+                        </figure>
+                    </li>
+                    <li>根据VGA时序逻辑，修改驱动模块代码，使VGA输出视频中图案位置根据按下按钮移动。</li>
+                </ol>
+
+                <h3>思考题</h3>
+                <ol>
+                    <li>根据VGA编码原理和给出的代码，计算输出视频的帧率（保留4位有效数字）。</li>
+                </ol>
+
+                <h3>考核要求</h3>
+                于1周内提交实验报告，内容包括仿真结果、VGA视频实现效果、修改后程序代码、思考题解答。
+                
+                <h3>实验索引</h3>
+                <ul class="nomarker">
+                    <li><a href="https://xunger99.github.io/xunger/ana1">模拟电路实验（一）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana2">模拟电路实验（二）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana3">模拟电路实验（三）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana4">模拟电路实验（四）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig1">数字电路实验（一）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig2">数字电路实验（二）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig3">数字电路实验（三）</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <DIV id=mw-navigation>
+            <H2>Navigation menu</H2>
+            <DIV id=mw-head>
+
+                <DIV id=left-navigation>
+                    <DIV id=p-namespaces class=vectorTabs role=navigation aria-labelledby=p-namespaces-label>
+                        <DIV class=menu>
+                            <UL></UL>
+                        </DIV>
+                    </DIV>
+                </DIV>
+
+                <DIV id=p-cactions class="vectorMenu emptyPortlet" role=navigation aria-labelledby=p-cactions-label>
+                    <DIV class=menu>
+                        <UL></UL>
+                    </DIV>
+                </DIV>
+
+            </DIV>
+        </DIV>
+        
+        
+        
+        <DIV id=mw-panel>
+            <DIV id=p-lang class=portal role=navigation aria-labelledby=p-lang-label>
+                <DIV id=p-logo role=banner></DIV>
+                <DIV id=p-navigation class=portal role=navigation aria-labelledby=p-navigation-label>
+                    <H3 id=p-navigation-label>Navigation</H3>
+                    <DIV class=body>
+                    <UL>
+                        <li><a href="https://xunger99.github.io/xunger/">English</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/papers.htm">Publication</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/chinese.htm">简介</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/group.htm">人才培养</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/aaero.htm">教学资源-气动声学</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/acontrol.htm">教学资源-主动控制</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/control.htm">教学资源-控制原理</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/ee.htm">教学资源-电路电子</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/flight.htm">教学资源-飞行控制</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/caa.htm">教学资源-CAA</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/sat.htm">教学资源-卫星初步</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/undergrad.htm">教学资源-本科科研</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/outcome.htm">科研成果科普</a></li>
+                    </UL>
+                    </UL>
+                    </DIV>
+                </DIV>
+        
+                <DIV id=p-lang class=portal role=navigation aria-labelledby=p-lang-label>
+            </DIV>
+        </DIV>
+    </div>
+
+    <DIV id=footer role=contentinfo>
+        <UL id=footer-info>
+            <LI id=footer-info-lastmod> </LI>
+        </UL>
+    </DIV>
+</body>
+</html>

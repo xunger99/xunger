@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>    
+    <title>Xunger@PKU</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="load.css">
+    <link rel="stylesheet" href="global.css">
+    <style>
+        ul.nomarker {
+          list-style: none;
+          margin: auto;
+          padding: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <DIV id=mw-page-base class=noprint></DIV>
+        <DIV id=mw-head-base class=noprint></DIV>
+        <div id="content" class="mw-body" role="main">
+            <div id="main">
+                <h2>数字电路实验（一） FPGA基础入门</h2>
+                <h3>实验目的</h3>
+                <ol>
+                    <li>了解FPGA (Field Programmable Gate Array)基础知识，学习Verilog语言的基本语法，区分时序逻辑和组合逻辑，并结合课上所学内容实现简单的门电路；</li>
+                    <li>掌握FPGA编程与烧录的基本流程，在Basys2 开发板上实现流水灯，在这一过程中对时钟、分频、状态机等概念有所了解；</li>
+                    <li>根据所学知识修改代码，利用分频实现七段数码管显示数字的功能。</li>
+                </ol>
+                <h3>预习材料</h3>
+                <ol>
+                    <li><a href="/download_file/Verilog基本语法.pptx" download>Verilog语言语法基础</a></li>
+                    <li><a href="/download_file/FPGA入门教程-Basys2.pptx" download>软件用法介绍</a></li>
+                    <li>编程题库，<a href="https://hdlbits.01xz.net/wiki/Problem_sets">https://hdlbits.01xz.net/wiki/Problem_sets</a></li>
+                </ol>
+                <h3>实验器材</h3>
+                Basys 2开发板，笔记本电脑1台（提前安装Xilinx ISE 14.7, Digilent Adept 2 <a href="/download_file/软件安装.zip" download>软件安装教程</a>），<a href="/download_file/dig1.zip">附件</a>。
+                <h3>实验步骤</h3>
+                <ol>
+                    <li>打开ISE Design Suite，新建工程，选择开发板型号Spartan3E-XC3S100E-CP132；</li>
+                    <li>创建主程序文件、约束文件、仿真文件，分别写入附件中相应代码；</li>
+                    <li>生成二进制程序文件并烧录至开发板上，实现按下对应按钮时点亮LED灯效果；</li>
+                    <li>烧录附件中提供的示例程序，实现4个LED的流水灯。</li>
+                    <li>修改示例程序，实现8个LED的流水灯<br>
+                        <figure>
+                            <img src="/images/dig1.gif" class="fans" width="500">
+                            <figcaption>八个LED组成的流水灯</figcaption>
+                        </figure>
+                    </li>
+                </ol>
+
+                <h3>思考题</h3>
+                <ol>
+                    <li>求将50MHz时钟分频至1.5Hz所需计数器位数。</li>
+                </ol>
+
+                
+                <h3>考核要求</h3>
+                于1周内提交实验报告，内容包括修改后的8LED流水灯程序代码、流水灯实现效果视频、思考题解答。
+
+                <h3>实验索引</h3>
+                <ul class="nomarker">
+                    <li><a href="https://xunger99.github.io/xunger/ana1">模拟电路实验（一）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana2">模拟电路实验（二）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana3">模拟电路实验（三）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana4">模拟电路实验（四）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig1">数字电路实验（一）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig2">数字电路实验（二）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig3">数字电路实验（三）</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <DIV id=mw-navigation>
+            <H2>Navigation menu</H2>
+            <DIV id=mw-head>
+
+                <DIV id=left-navigation>
+                    <DIV id=p-namespaces class=vectorTabs role=navigation aria-labelledby=p-namespaces-label>
+                        <DIV class=menu>
+                            <UL></UL>
+                        </DIV>
+                    </DIV>
+                </DIV>
+
+                <DIV id=p-cactions class="vectorMenu emptyPortlet" role=navigation aria-labelledby=p-cactions-label>
+                    <DIV class=menu>
+                        <UL></UL>
+                    </DIV>
+                </DIV>
+
+            </DIV>
+        </DIV>
+        
+        
+        
+        <DIV id=mw-panel>
+            <DIV id=p-lang class=portal role=navigation aria-labelledby=p-lang-label>
+                <DIV id=p-logo role=banner></DIV>
+                <DIV id=p-navigation class=portal role=navigation aria-labelledby=p-navigation-label>
+                    <H3 id=p-navigation-label>Navigation</H3>
+                    <DIV class=body>
+                    <UL>
+                        <li><a href="https://xunger99.github.io/xunger/">English</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/papers.htm">Publication</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/chinese.htm">简介</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/group.htm">人才培养</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/aaero.htm">教学资源-气动声学</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/acontrol.htm">教学资源-主动控制</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/control.htm">教学资源-控制原理</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/ee.htm">教学资源-电路电子</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/flight.htm">教学资源-飞行控制</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/caa.htm">教学资源-CAA</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/sat.htm">教学资源-卫星初步</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/undergrad.htm">教学资源-本科科研</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/outcome.htm">科研成果科普</a></li>
+                    </UL>
+                    </UL>
+                    </DIV>
+                </DIV>
+        
+                <DIV id=p-lang class=portal role=navigation aria-labelledby=p-lang-label>
+            </DIV>
+        </DIV>
+    </div>
+
+    <DIV id=footer role=contentinfo>
+        <UL id=footer-info>
+            <LI id=footer-info-lastmod> </LI>
+        </UL>
+    </DIV>
+</body>
+</html>

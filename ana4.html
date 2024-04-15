@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>    
+    <title>Xunger@PKU</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="load.css">
+    <link rel="stylesheet" href="global.css">
+    <style>
+        ul.nomarker {
+          list-style: none;
+          margin: auto;
+          padding: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <DIV id=mw-page-base class=noprint></DIV>
+        <DIV id=mw-head-base class=noprint></DIV>
+        <div id="content" class="mw-body" role="main">
+            <div id="main">
+                <h2>模拟电路实验（四） Arduino驱动电机与数模转换</h2>
+                <h3>实验目的</h3>
+                <ol>
+                    <li>了解单片机、微控制器单元、嵌入式系统等基本概念；</li>
+                    <li>了解脉宽调制（PWM）的原理及其与模数转换的关系；</li>
+                    <li>学习并编程使用Arduino的PWM引脚，配合晶体管开关电路，驱动直流电机并控制其转速。</li>
+                </ol>
+                <h3>预习材料</h3>
+                <ol>
+                    <li>Arduino开发板介绍：<a href="https://baike.baidu.com/item/Arduino/9362389">Arduino_百度百科 (baidu.com)</a></li>
+                    <li>脉宽调制（PWM）基本定义及其原理与应用：<a href="https://zhuanlan.zhihu.com/p/231647104">手撕系列（1）：PWM控制的基本原理 - 知乎 (zhihu.com)</a></li>
+                    <li>Arduino开发板基础教程：<a href="https://www.w3cschool.cn/arduino/">Arduino 教程_w3cschool</a></li>
+                </ol>
+                <h3>实验器材</h3>
+                Arduino开发板1个，示波器1台，万用表1个，USB线缆1条，12V电源适配器1个，电机驱动板/电调1个，直流电机1个，杜邦线若干，笔记本电脑1台（安装<a href="https://www.arduino.cc/en/software">Arduino IDE</a>）。
+                <h3>实验步骤</h3>
+                <ol>
+                    <li>参考预习材料，学习Arduino的基本硬件组成和简单编程原理，掌握Arduino IDE的使用方法；<br>
+                        <figure>
+                            <img src="/images/ana4_1.png" class="fans" width="500">
+                            <figcaption>Arduino IDE用户界面</figcaption>
+                        </figure>
+                    </li>
+                    <li>在面包板上搭建直流电机控制电路，并将Arduino开发板的任一模拟输出（Analog output）引脚接入电路；<br>
+                        <figure>
+                            <img src="/images/ana4_1.png" class="fans" width="500">
+                            <figcaption>借助三极管放大效应，使用Arduino控制直流电机的转速电路图</figcaption>
+                        </figure>
+                    </li>
+                    <li>将Arduino与笔记本电脑用USB线缆连接，编写简单的控制程序，最终能够通过串口监视器输入数字控制直流电机的转速。</li>
+                </ol>
+
+                <h3>考核要求</h3>
+                于1周内提交实验报告，内容包括电机驱动程序代码、控制电机转速效果视频。
+
+                <h3>实验索引</h3>
+                <ul class="nomarker">
+                    <li><a href="https://xunger99.github.io/xunger/ana1">模拟电路实验（一）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana2">模拟电路实验（二）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana3">模拟电路实验（三）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana4">模拟电路实验（四）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig1">数字电路实验（一）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig2">数字电路实验（二）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig3">数字电路实验（三）</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <DIV id=mw-navigation>
+            <H2>Navigation menu</H2>
+            <DIV id=mw-head>
+
+                <DIV id=left-navigation>
+                    <DIV id=p-namespaces class=vectorTabs role=navigation aria-labelledby=p-namespaces-label>
+                        <DIV class=menu>
+                            <UL></UL>
+                        </DIV>
+                    </DIV>
+                </DIV>
+
+                <DIV id=p-cactions class="vectorMenu emptyPortlet" role=navigation aria-labelledby=p-cactions-label>
+                    <DIV class=menu>
+                        <UL></UL>
+                    </DIV>
+                </DIV>
+
+            </DIV>
+        </DIV>
+        
+        
+        
+        <DIV id=mw-panel>
+            <DIV id=p-lang class=portal role=navigation aria-labelledby=p-lang-label>
+                <DIV id=p-logo role=banner></DIV>
+                <DIV id=p-navigation class=portal role=navigation aria-labelledby=p-navigation-label>
+                    <H3 id=p-navigation-label>Navigation</H3>
+                    <DIV class=body>
+                    <UL>
+                        <li><a href="https://xunger99.github.io/xunger/">English</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/papers.htm">Publication</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/chinese.htm">简介</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/group.htm">人才培养</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/aaero.htm">教学资源-气动声学</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/acontrol.htm">教学资源-主动控制</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/control.htm">教学资源-控制原理</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/ee.htm">教学资源-电路电子</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/flight.htm">教学资源-飞行控制</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/caa.htm">教学资源-CAA</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/sat.htm">教学资源-卫星初步</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/undergrad.htm">教学资源-本科科研</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/outcome.htm">科研成果科普</a></li>
+                    </UL>
+                    </UL>
+                    </DIV>
+                </DIV>
+        
+                <DIV id=p-lang class=portal role=navigation aria-labelledby=p-lang-label>
+            </DIV>
+        </DIV>
+    </div>
+
+    <DIV id=footer role=contentinfo>
+        <UL id=footer-info>
+            <LI id=footer-info-lastmod> </LI>
+        </UL>
+    </DIV>
+</body>
+</html>

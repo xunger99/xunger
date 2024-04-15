@@ -26,3 +26,15 @@ body {
 	padding-top: 0px;
 	padding-right: 20%;
 }
+
+figure {
+	margin: 20px;
+	padding: 10px;
+	background-color: #fff;
+	display: inline-block;
+}
+
+figcaption {
+	padding: 3px;
+	text-align: center;
+  }
