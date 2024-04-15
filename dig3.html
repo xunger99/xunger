@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>    
+    <title>Xunger@PKU</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="load.css">
+    <link rel="stylesheet" href="global.css">
+    <style>
+        ul.nomarker {
+          list-style: none;
+          margin: auto;
+          padding: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <DIV id=mw-page-base class=noprint></DIV>
+        <DIV id=mw-head-base class=noprint></DIV>
+        <div id="content" class="mw-body" role="main">
+            <div id="main">
+                <h2>数字电路实验（三） FPGA应用实例之梳状滤波器</h2>
+                <h3>实验目的</h3>
+                <ol>
+                    <li>了解Sigma-delta调制器的相关知识，结合课上所学知识对模拟信号和数字信号有进一步理解；</li>
+                    <li>利用FPGA实现梳状滤波器，通过观察仿真结果理解梳状滤波器的原理；</li>
+                    <li>实例化FFT（快速傅里叶变换） IP核，对频域信号处理有所了解。</li>
+                </ol>
+                <h3>预习材料</h3>
+                <ol>
+                    <li>ADC（模数转换器）的概念：<a href="https://zhuanlan.zhihu.com/p/258434654">单片机外围模块漫谈之一，图解说明什么是Flash, SAR, Sigma-Delta型ADC - 知乎 (zhihu.com)</a></li>
+                    <li>Sigma-delta调制器可交互示例：<a href="https://www.analog.com/en/design-center/interactive-design-tools/sigma-delta-adc-tutorial.html">Sigma-Delta ADC Tutorial | Design Center | Analog Devices</a></li>
+                    <li>梳状滤波器结构设计：<a href="https://bestfpga.blog.csdn.net/article/details/80881484">FPGA数字信号处理（十六）单级CIC滤波器Verilog设计-CSDN博客</a></li><a href="https://blog.csdn.net/FPGADesigner/article/details/80885415">FPGA数字信号处理（十七）多级CIC滤波器Verilog设计-CSDN博客</a></li>
+                </ol>
+                <h3>实验器材</h3>
+                Basys 2开发板，笔记本电脑1台（提前安装Xilinx ISE 14.7），<a href="/download_file/dig3.zip">附件</a>。
+                <h3>实验步骤</h3>
+                <ol>
+                    <li>建立顶层top模块并实例化Integrated,Decimate,Comb三个模块；<br>
+                        <figure>
+                            <img src="/images/dig3_1.png" class="fans" width="500">
+                            <figcaption>各模块间关系</figcaption>
+                        </figure>
+                    </li>
+                    <li>用滤波器模块处理信号。<br>
+                        <figure>
+                            <img src="/images/dig3_3.png" class="fans" width="500">
+                            <figcaption>ModelSim仿真软件中滤波前后信号波形</figcaption>
+                        </figure>
+                    </li>
+                </ol>
+
+                <h3>思考题</h3>
+                <ol>
+                    <li>分别给出y=sin(2πx)信号在4Hz和16Hz采样频率下经过Sigma-delta调制器的前16项输出，以此说明Sigma-delta调制器的过采样特点</li>
+                </ol>
+
+                <h3>考核要求</h3>
+                于1周内提交实验报告，内容包括仿真结果、思考题解答。
+
+                <h3>实验索引</h3>
+                <ul class="nomarker">
+                    <li><a href="https://xunger99.github.io/xunger/ana1">模拟电路实验（一）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana2">模拟电路实验（二）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana3">模拟电路实验（三）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana4">模拟电路实验（四）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig1">数字电路实验（一）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig2">数字电路实验（二）</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig3">数字电路实验（三）</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <DIV id=mw-navigation>
+            <H2>Navigation menu</H2>
+            <DIV id=mw-head>
+
+                <DIV id=left-navigation>
+                    <DIV id=p-namespaces class=vectorTabs role=navigation aria-labelledby=p-namespaces-label>
+                        <DIV class=menu>
+                            <UL></UL>
+                        </DIV>
+                    </DIV>
+                </DIV>
+
+                <DIV id=p-cactions class="vectorMenu emptyPortlet" role=navigation aria-labelledby=p-cactions-label>
+                    <DIV class=menu>
+                        <UL></UL>
+                    </DIV>
+                </DIV>
+
+            </DIV>
+        </DIV>
+        
+        
+        
+        <DIV id=mw-panel>
+            <DIV id=p-lang class=portal role=navigation aria-labelledby=p-lang-label>
+                <DIV id=p-logo role=banner></DIV>
+                <DIV id=p-navigation class=portal role=navigation aria-labelledby=p-navigation-label>
+                    <H3 id=p-navigation-label>Navigation</H3>
+                    <DIV class=body>
+                    <UL>
+                        <li><a href="https://xunger99.github.io/xunger/">English</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/papers.htm">Publication</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/chinese.htm">简介</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/group.htm">人才培养</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/aaero.htm">教学资源-气动声学</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/acontrol.htm">教学资源-主动控制</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/control.htm">教学资源-控制原理</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/ee.htm">教学资源-电路电子</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/flight.htm">教学资源-飞行控制</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/caa.htm">教学资源-CAA</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/sat.htm">教学资源-卫星初步</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/undergrad.htm">教学资源-本科科研</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/outcome.htm">科研成果科普</a></li>
+                    </UL>
+                    </UL>
+                    </DIV>
+                </DIV>
+        
+                <DIV id=p-lang class=portal role=navigation aria-labelledby=p-lang-label>
+            </DIV>
+        </DIV>
+    </div>
+
+    <DIV id=footer role=contentinfo>
+        <UL id=footer-info>
+            <LI id=footer-info-lastmod> </LI>
+        </UL>
+    </DIV>
+</body>
+</html>
