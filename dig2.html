@@ -32,14 +32,14 @@
                     <li>VGA视频编码原理：<a href="https://www.cnblogs.com/liujinggang/p/9690504.html">VGA接口原理与Verilog实现 - 博客园</a></li>
                 </ol>
                 <h3>实验器材</h3>
-                Basys 2开发板，笔记本电脑1台（提前安装Xilinx ISE 14.7），<a href="/download_file/dig2.zip">附件</a>。
+                Basys 2开发板，笔记本电脑1台（提前安装Xilinx ISE 14.7），<a href="download_file/dig2.zip">附件</a>。
                 <h3>实验步骤</h3>
                 <ol>
                     <li>建立并调用RAM IP核，修改Memory Type为 Single Port RAM，修改位宽为8，深度为32，模式为Write First；</li>
                     <li>建立仿真文件，并在ISE中运行仿真程序；</li>
                     <li>查看仿真时序结果；<br>
                         <figure>
-                            <img src="/images/dig2_1.png" class="fans" width="500">
+                            <img src="images/dig2_1.png" class="fans" width="500">
                             <figcaption>仿真结果中，读数据比写数据晚一个时钟，这与之前的设置有关，可以尝试改为Read First，再仿真一次并观察结果</figcaption>
                         </figure>
                     </li>
@@ -47,7 +47,7 @@
                     <li>将电脑连接到FPGA开发板，导入附件中的顶层文件、约束文件，实例化IP核；</li>
                     <li>将开发板的视频输出接口与显示器相连，在屏幕上输出箭头图案。<br>
                         <figure>
-                            <img src="/images/dig2_2.jpg" class="fans" width="500">
+                            <img src="images/dig2_2.jpg" class="fans" width="500">
                             <figcaption>写在coe文件中的箭头图案经开发板输出到显示器上</figcaption>
                         </figure>
                     </li>
