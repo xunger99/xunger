@@ -209,7 +209,7 @@ Objective：一饭三吃
 Python基本：
 <ol>
 	<li> Python基本：https://docs.python.org/3.8/tutorial/index.html，只需要Python基本语法. </li>
-	<li> Read: https://pyspice.fabrice-salvaire.fr/releases/v1.6/examples/data-analysis/fft.html</li>
+	<li> Read: https://pyspice.fabrice-salvaire.fr/releases/v1.5/examples/data-analysis/fft.html</li>
 	<li> 理解每一行代码，自行google fft或者看MATLAB中dft函数help。matplotlib的用法同MATLAB中绘图。</li>		
 </ol>	
 	
@@ -217,7 +217,7 @@ Python基本：
 	
 Installation 	
 <ol>
-<li> https://pyspice.fabrice-salvaire.fr/releases/v1.6/installation.html</li>
+<li> https://pyspice.fabrice-salvaire.fr/releases/v1.5/installation.html</li>
 <li> 安装不会，其它免谈。遇到报错，多多Google。</li>
 <li> 用conda create -n envname来建立虚拟环境后再装。</li>
 <li> Win/Linux/OSX都可以，但目前不适用于M1, M2系统（2022.8）。</li>
@@ -227,16 +227,16 @@ Installation
 	
 Fundamental tests
 <ol>
-<li>分压电路. Read: https://pyspice.fabrice-salvaire.fr/releases/v1.6/examples/fundamental-laws/voltage-current-divider.html, examples/fundamental-laws/voltage-current-divider.py. 提示：看懂每一行代码，理解代码如何表达实际电路之间各元件的连接关系。以电阻桥为例：Read: https://pyspice.fabrice-salvaire.fr/releases/v1.6/examples/resistor/resistor-bridge.html, 读code: examples/resistor/resistor-bridge.py，提示：根据如此简单的code搞清楚怎么用python语言来描述电路连接关系。 </li>
-<li> KVL/KCL. Read: https://pyspice.fabrice-salvaire.fr/releases/v1.6/examples/fundamental-laws/index.html, click 8.8.1. examples/fundamental-laws/millman-theorem.py, 读每一行code，对照执行。提示：import pdb. </li>
-<li> Thevenin/Norton. Read: https://pyspice.fabrice-salvaire.fr/releases/v1.6/examples/fundamental-laws/thevenin-norton-theorem.html. examples/fundamental-laws/thevenin-norton-theorem.py. 提示：代码观其大意即可。 </li>
-<li> Diode V-I curve. Read: https://pyspice.fabrice-salvaire.fr/releases/v1.6/examples/diode/diode-characteristic-curve.html. examples/diode/diode-characteristic-curve.py. 提示：import pdb, 设置断点，逐行debug，理解每一行。 注意：网页上的结果图正确，实际生成code中线条颜色可能不一致，以网页为准。此外，spice_library此类object查看里面内容用vars, 即vars(spice_library). 注意2：此程序可能有bug，但设置断点后不影响执行到bug前面的主体程序。 static resistance and dynamic resistance, 了解即可。</li>
-<li> Diode rectification. Read: https://pyspice.fabrice-salvaire.fr/releases/v1.6/examples/diode/rectification.html. 
+<li>分压电路. Read: https://pyspice.fabrice-salvaire.fr/releases/v1.5/examples/fundamental-laws/voltage-current-divider.html, examples/fundamental-laws/voltage-current-divider.py. 提示：看懂每一行代码，理解代码如何表达实际电路之间各元件的连接关系。以电阻桥为例：Read: https://pyspice.fabrice-salvaire.fr/releases/v1.5/examples/resistor/resistor-bridge.html, 读code: examples/resistor/resistor-bridge.py，提示：根据如此简单的code搞清楚怎么用python语言来描述电路连接关系。 </li>
+<li> KVL/KCL. Read: https://pyspice.fabrice-salvaire.fr/releases/v1.5/examples/fundamental-laws/index.html, click 8.8.1. examples/fundamental-laws/millman-theorem.py, 读每一行code，对照执行。提示：import pdb. </li>
+<li> Thevenin/Norton. Read: https://pyspice.fabrice-salvaire.fr/releases/v1.5/examples/fundamental-laws/thevenin-norton-theorem.html. examples/fundamental-laws/thevenin-norton-theorem.py. 提示：代码观其大意即可。 </li>
+<li> Diode V-I curve. Read: https://pyspice.fabrice-salvaire.fr/releases/v1.5/examples/diode/diode-characteristic-curve.html. examples/diode/diode-characteristic-curve.py. 提示：import pdb, 设置断点，逐行debug，理解每一行。 注意：网页上的结果图正确，实际生成code中线条颜色可能不一致，以网页为准。此外，spice_library此类object查看里面内容用vars, 即vars(spice_library). 注意2：此程序可能有bug，但设置断点后不影响执行到bug前面的主体程序。 static resistance and dynamic resistance, 了解即可。</li>
+<li> Diode rectification. Read: https://pyspice.fabrice-salvaire.fr/releases/v1.5/examples/diode/rectification.html. 
 examples/diode/rectification.py. 逐行阅读理解。提示：理解半波整流和全波整流的设计区别；理解滤波在其中的作用及物理实现。 </li>
-<li> Optional: Diode voltage multiplier 蚊子拍电路. Read: https://pyspice.fabrice-salvaire.fr/releases/v1.6/examples/diode/voltage-multiplier.html, and the wikipedia reference therein. 警告：在无指导下，别自己做此实际实验。 examples/diode/voltage-multiplier.py</li>
-<li> MOSFET. Read: https://pyspice.fabrice-salvaire.fr/releases/v1.6/examples/transistor/nmos-transistor.html. examples/transisor/nmos-transistor.py, 提示：没几行代码，重点读清楚如何调用mosfet库，及如何描述其连接关系。Optional: How to plot the other curve for Vgs vs Vds? </li>
-<li> OpAMP. Read: https://pyspice.fabrice-salvaire.fr/releases/v1.6/examples/operational-amplifier/operational-amplifier.html, 搞懂其中如何用来做比较器的思想和code。修改代码，实现微分器。</li>
-<li> First-order system. Read: https://pyspice.fabrice-salvaire.fr/releases/v1.6/examples/passive/capacitor-inductor.html. 修改代码，自行研究不同R, C参数的变化对动态性能的影响。提示：本例子可用来清晰展示什么是transient response，什么是steady values, 什么是states. </li>
+<li> Optional: Diode voltage multiplier 蚊子拍电路. Read: https://pyspice.fabrice-salvaire.fr/releases/v1.5/examples/diode/voltage-multiplier.html, and the wikipedia reference therein. 警告：在无指导下，别自己做此实际实验。 examples/diode/voltage-multiplier.py</li>
+<li> MOSFET. Read: https://pyspice.fabrice-salvaire.fr/releases/v1.5/examples/transistor/nmos-transistor.html. examples/transisor/nmos-transistor.py, 提示：没几行代码，重点读清楚如何调用mosfet库，及如何描述其连接关系。Optional: How to plot the other curve for Vgs vs Vds? </li>
+<li> OpAMP. Read: https://pyspice.fabrice-salvaire.fr/releases/v1.5/examples/operational-amplifier/operational-amplifier.html, 搞懂其中如何用来做比较器的思想和code。修改代码，实现微分器。</li>
+<li> First-order system. Read: https://pyspice.fabrice-salvaire.fr/releases/v1.5/examples/passive/capacitor-inductor.html. 修改代码，自行研究不同R, C参数的变化对动态性能的影响。提示：本例子可用来清晰展示什么是transient response，什么是steady values, 什么是states. </li>
 
 
 </ol>
