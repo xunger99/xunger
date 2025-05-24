@@ -144,11 +144,115 @@ HWs: (1) Go through Example 3.2 (omit signal-flow graph);
 <li>  Control applications II. </li>
 <li>  Mock exam. </li>
 
-
-
-
 </ol>
 
+
+     <div id="content" class="mw-body" role="main">
+            <div id="main">
+                <h2>控制原理实验课-倒立摆</h2>
+
+                <h3>前置准备</h3>
+                <ol>
+                    <li>下载并安装 Arduino IDE 1.8.16。</li>
+                    <li>确保电脑已配置 Python 3（建议 3.8）。</li>
+                    <li>下载 <b>倒立摆控制代码包</b>，解压放入同一文件夹下。安装 Python 所需依赖库：time，math，multiprocessing，matplotlib，pyqtgraph，serial，datetime。</li>
+                </ol>
+
+                <h3>课程安排</h3>
+                <ol>
+                    <li>
+                        <b>第一节课：硬件连接与传感器调试</b>
+                        <ul>
+                            <li>讲解系统组件：Arduino、TB6612 驱动、电位计、编码器、倒立摆机构
+                                <figure>
+                                    <img src="images/ctr1.png" class="fans" width="500">
+                                    <figcaption>图1：倒立摆系统结构</figcaption>
+                                </figure>
+                            </li>
+                            <li>根据提供接线图完成连线
+                                <figure>
+                                    <img src="images/ctr2.png" class="fans" width="500">
+                                    <figcaption>图2：倒立摆接线图示意</figcaption>
+                                </figure>
+                                <figure>
+                                    <img src="images/ctr3.png" class="fans" width="500">
+                                    <figcaption>图3：电机接线图示意</figcaption>
+                                </figure>
+                            </li>
+                            <li>烧录测试代码 <code>A_0.cpp</code>，通过工具 → 串口监视器查看 A0 电位计值。</li>
+                            <li>将 <code>inverted_pendulum_v2_class_v4.py</code> 以及 <code>full_state_controller_v2_class_v4.py</code> 中竖直电位计值设定值更改为观测值（一般在 750–800）。</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <b>第二节课：PID 控制器设计</b>
+                        <ul>
+                            <li>回顾讲解 PID 控制原理。</li>
+                            <li>补写 Python 控制器代码，实现对竖直角的闭环控制。</li>
+                            <li>调试参数，连好硬件，打开 IDE，双击 Arduino 复位键，在工具中选择正确的板子和端口（例如显示端口为 COM4），烧录 Arduino 代码。随后打开 <code>full_state_controller_v2_class_v4.py</code>，更改通信部分端口为 COM4。给电机通电，将倒立摆扶到竖直位置，同时运行 <code>full_state_controller_v2_class_v4.py</code>，倒立摆开始运转。运行一轮后，单击 Arduino 上的复位键，可运行下一次，实现 30 秒稳定控制。</li>
+                            <li>记录控制响应并分析控制器动态特性。</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <b>第三节课：全状态反馈控制器设计</b>
+                        <ul>
+                            <li>讲解全状态反馈控制理论，参考 <a href="https://zhuanlan.zhihu.com/p/400714590" target="_blank">知乎专栏文章</a>。</li>
+                            <li>根据倒立摆参数，使用 MATLAB 计算 LQR 最优化增益。</li>
+                            <li>完善 <code>fullstate_controller_v2_class_v4.py</code> 控制逻辑。</li>
+                            <li>连好硬件，实现 30 秒稳定控制。启动方式同第二节课。</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h3>通信及 py 代码简介</h3>
+                <ol>
+                    <li>
+                        <b>UART 通信机制：</b>使用 USB 实现 PC 与 Arduino 间的 UART 通信，采用握手机制确保同步。
+                        <ul>
+                            <li>PC 端发送握手命令 <code>self.ser.write(b"GO\n")</code></li>
+                            <li>Arduino 端接收 3 字节并检查 <code>buf == "GO\n"</code></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <b>通信数据结构：</b>
+                        <ul>
+                            <li><b>PC → Arduino：</b>3 字节控制指令 [方向 dir，占空比 pwm，标志位 17]</li>
+                            <li><b>Arduino → PC：</b>10 字节状态数据 [电位计值、电位计变化率、编码器值、编码器变化率、符号标志]</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <b>Python 控制代码结构：</b>
+                        <ul>
+                            <li><code>arduino_v2.py</code>：封装串口通信逻辑，负责握手、读写数据。</li>
+                            <li><code>inverted_pendulum_v2_class_v4.py</code>：处理 Arduino 返回的原始数据，并转换为物理状态。</li>
+                            <li><code>fullstate_controller_v2_class_v4.py</code>：主控制器程序，基于 LQR 实现全状态反馈。</li>
+                            <li><code>save_angle_values_v2.py</code> 与 <code>save_actions.py</code>：将运行过程中记录的角度值（theta/alpha）与控制指令（PWM）存储为文本。</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <b>Arduino 固件 <code>uart_inverted_pendulum.ino</code>：</b>
+                        <ul>
+                            <li>读取编码器和电位计数据。</li>
+                            <li>计算角速度，响应上位机控制指令。</li>
+                            <li>通过 UART 定时发送 10 字节状态数据。</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h3>实验考核</h3>
+                <ul>
+                    <li>需提交电子报告（PDF），包括：</li>
+                    <ul>
+                        <li>实验图片、Python 控制器代码截图、角度随时间变化曲线。</li>
+                        <li>对 PID 与全状态反馈控制的比较分析。</li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+	
+
+	
 <h4><a name="6"></a>* 说明：受GitHub托管300M空间限制，所有参考资料不再此提供，请尝试：http://www2.coe.pku.edu.cn/faculty/huangxun。</h4>	
 
 
