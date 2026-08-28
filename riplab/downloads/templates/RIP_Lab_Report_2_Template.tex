@@ -1,0 +1,872 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,top=18mm,bottom=18mm,left=20mm,right=20mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{newtxtext,newtxmath}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{siunitx}
+\usepackage{amsmath,bm}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage[most]{tcolorbox}
+\usepackage{setspace}
+\usepackage{titlesec}
+
+\definecolor{TAblue}{RGB}{31,78,121}
+\definecolor{TAgray}{RGB}{244,246,248}
+\definecolor{TAred}{RGB}{170,32,37}
+\definecolor{TAgreen}{RGB}{32,112,72}
+
+\newcommand{\CourseName}{AI Enabled Control Engineering}
+\newcommand{\ReportTitle}{Laboratory Report 2: LQR Control of a Rotary Inverted Pendulum}
+\newcommand{\GroupNumber}{Group XX}
+\newcommand{\StudentNames}{Name 1; Name 2; Name 3; Name 4}
+\newcommand{\StudentIDs}{ID 1; ID 2; ID 3; ID 4}
+\newcommand{\SubmissionDate}{YYYY-MM-DD}
+
+\hypersetup{colorlinks=true,linkcolor=TAblue,urlcolor=TAblue,pdftitle={RIP LQR Laboratory Report 2}}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small\CourseName}
+\rhead{\small Laboratory Report 2}
+\cfoot{\small Page \thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.5pt}
+
+\titleformat{\section}{\large\bfseries\color{TAblue}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\setlist[itemize]{leftmargin=6mm,itemsep=2pt,topsep=3pt}
+\setlist[enumerate]{leftmargin=8mm,itemsep=3pt,topsep=3pt}
+\captionsetup{font=small,labelfont=bf}
+\renewcommand{\arraystretch}{1.2}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+% Keep TRUE while reading the instructions. Change to \instructionsfalse
+% before submitting the final report.
+%=======================================================================%==================================================================
+\newif\ifinstructions
+\instructionstrue
+%=======================================================================%===================================================================
+
+\newtcolorbox{requirementbox}[1][]{
+  colback=TAgray,colframe=TAblue,boxrule=0.7pt,arc=1mm,
+  left=2mm,right=2mm,top=1.5mm,bottom=1.5mm,#1}
+\newtcolorbox{warningbox}{
+  colback=red!4,colframe=TAred,boxrule=0.8pt,arc=1mm,
+  left=2mm,right=2mm,top=1.5mm,bottom=1.5mm}
+\newtcolorbox{studentbox}{
+  colback=white,colframe=black!40,boxrule=0.5pt,arc=0mm,
+  left=2mm,right=2mm,top=1.5mm,bottom=1.5mm}
+
+\newcommand{\studenttext}[1]{\begin{studentbox}\vspace{#1}\end{studentbox}}
+\newcommand{\placeholderfigure}[2]{%
+\begin{figure}[H]
+\centering
+\IfFileExists{#1}{\includegraphics[width=0.88\linewidth]{#1}}{%
+\fbox{\parbox[c][50mm][c]{0.82\linewidth}{\centering Insert original figure\\\texttt{\detokenize{#1}}}}}
+\caption{#2}
+\end{figure}}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{15mm}
+{\Large\bfseries \CourseName\par}
+\vspace{13mm}
+{\huge\bfseries\color{TAblue} \ReportTitle\par}
+\vspace{18mm}
+\begin{tabular}{>{\bfseries}rl}
+Group: & \GroupNumber\\[2mm]
+Students: & \StudentNames\\[2mm]
+Student IDs: & \StudentIDs\\[2mm]
+Submission date: & \SubmissionDate
+\end{tabular}
+\vfill
+\begin{tcolorbox}[width=0.86\linewidth,colback=TAgray,colframe=TAblue]
+\centering
+Submit one group ZIP through one designated representative. Include the report
+PDF, all original CSV logs and one original PNG result figure for every CSV log.
+\end{tcolorbox}
+\vspace{8mm}
+{\small Teaching Assistants: Zhixiang Ju and Haozhe Wang}
+\end{titlepage}
+
+\ifinstructions
+\section*{Submission Requirements -- Remove Before Final Submission}
+\addcontentsline{toc}{section}{Submission Requirements}
+
+\begin{warningbox}
+Before submission, change \verb|\instructionstrue| to
+\verb|\instructionsfalse|. Remove all placeholder text and retain only the
+group's own calculations, results and analysis.
+\end{warningbox}
+
+\begin{requirementbox}
+\textbf{Group submission and contribution-based individual grading}
+
+Each group submits one report ZIP through one designated representative. Groups
+may contain two, three or four members. Group size does not affect the grading
+criteria or the total group score. However, the individual scores of group
+members may be adjusted according to the agreed contribution percentages, so
+that relative effort and participation are reflected fairly.
+
+It is strongly discouraged to assign the entire experiment and report to one
+member, except when another member could not attend the relevant laboratory
+session for a valid reason. State each member's work and percentage clearly.
+The percentages must sum to 100\%. The teaching assistants will not determine
+or arbitrate the group's internal division of work; disagreements must be
+resolved within the group before submission.
+\end{requirementbox}
+
+\begin{requirementbox}
+\textbf{Required ZIP structure}
+\begin{verbatim}
+GroupXX_LabReport2.zip
+|-- GroupXX_LabReport2.pdf
+|-- data/
+|   |-- P2_SIM_CONT_R1.csv
+|   |-- P2_SIM_DISC_R1.csv
+|   |-- P3_HW_DISC_R1.csv
+|   |-- P5_SIM_PID_R1.csv
+|   `-- P5_HW_PID_R1.csv
+`-- figures/
+    `-- one original PNG for every CSV, with matching identifiers
+\end{verbatim}
+Every file referenced in the report must be included and open correctly.
+\end{requirementbox}
+
+\begin{requirementbox}
+\textbf{Controlled comparisons}
+
+When comparing continuous-design and discrete-design LQR, keep the nonlinear
+plant, initial condition, PWM limit, swing-up parameters, blend, duration and
+noise settings unchanged. When comparing simulation and hardware, use the same
+discrete gain and matching controller settings. When comparing LQR with Class-8
+dual PID, use the group's own previously tuned PID gains rather than another
+group's values.
+\end{requirementbox}
+
+
+
+\begin{requirementbox}
+\textbf{Scientific reporting}
+
+Show calculation steps and units. Every figure must have a caption and be
+discussed in the text. Report controller settings with sufficient precision to
+reproduce the experiment. Do not show only a favourable run; include all runs
+used to calculate summary statistics and discuss unsuccessful captures or
+outliers honestly.
+\end{requirementbox}
+\clearpage
+\fi
+
+\tableofcontents
+\clearpage
+
+\section*{Group Member Contributions}
+
+The percentages must sum to 100\%. Group size does not change the grading
+criteria or total group score; the declared contribution percentages may affect
+the relative individual scores within the group.
+
+\begin{table}[H]
+\centering
+\caption{Contribution of each group member}
+\label{tab:contribution}
+\begin{tabularx}{\textwidth}{|c|p{28mm}|Y|p{27mm}|}
+\hline
+\textbf{Member} & \textbf{Name} & \textbf{Main contribution} &
+\textbf{Contribution (\%)}\\
+\hline
+Member 1 & & & \\
+\hline
+Member 2 & & & \\
+\hline
+Member 3 & & & \\
+\hline
+Member 4 & & & \\
+\hline
+\multicolumn{3}{|r|}{\textbf{Total}} & \textbf{100\%}\\
+\hline
+\end{tabularx}
+\end{table}
+Remove unused rows for groups with fewer than four members.
+
+\section{Part I: Continuous and Discrete LQR Gain Calculation}
+\label{sec:gains}
+
+\subsection{Model, state convention and weights}
+
+State the state order and reproduce the matrices used in the calculation:
+\[
+\bm{x}=\begin{bmatrix}\theta&\dot\theta&\alpha&\dot\alpha\end{bmatrix}^{T},
+\qquad \dot{\bm{x}}=A\bm{x}+Bu.
+\]
+
+\studenttext{25mm}
+
+Record the selected matrices and sample time:
+\[
+Q=\operatorname{diag}(\underline{\hspace{12mm}},\underline{\hspace{12mm}},
+\underline{\hspace{12mm}},\underline{\hspace{12mm}}),\qquad
+R=\underline{\hspace{18mm}},\qquad T_s=\underline{\hspace{18mm}}.
+\]
+
+\subsection{Continuous-time CARE calculation}
+
+Show the performance index, CARE, calculation method and final $P_c$ and $K_c$.
+Use the standard convention $u=-K_cx$.
+
+\studenttext{48mm}
+
+\begin{table}[H]
+\centering
+\caption{Continuous-design LQR result}
+\label{tab:kc}
+\begin{tabular}{lc}
+\toprule
+Quantity & Numerical result\\
+\midrule
+$K_{c,\theta}$ & \\
+$K_{c,\dot\theta}$ & \\
+$K_{c,\alpha}$ & \\
+$K_{c,\dot\alpha}$ & \\
+Closed-loop eigenvalues of $A-BK_c$ & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{ZOH discretisation and DARE calculation}
+
+First convert the continuous-time model into a discrete-time model using
+zero-order-hold (ZOH) discretisation with
+
+\[
+T_s=0.005~\mathrm{s}.
+\]
+
+For the input $u_k$ being constant within each sampling interval,
+
+\[
+x_{k+1}=A_dx_k+B_du_k ,
+\]
+
+where
+
+\[
+A_d=e^{AT_s},
+\]
+
+and
+
+\[
+B_d=\int_0^{T_s}e^{A\tau}B\,d\tau .
+\]
+
+Students should show how $A_d$ and $B_d$ are obtained numerically.
+
+For the discrete-time LQR design, consider the cost function
+
+\[
+J_d=
+\sum_{k=0}^{\infty}
+(x_k^TQx_k+u_k^TRu_k).
+\]
+
+The optimal control law has the form
+
+\[
+u_k=-K_dx_k .
+\]
+
+Starting from the Bellman optimality equation, derive the discrete Riccati
+equation:
+
+\[
+P_d=
+A_d^TP_dA_d
+-
+A_d^TP_dB_d
+(R+B_d^TP_dB_d)^{-1}
+B_d^TP_dA_d
++Q .
+\]
+
+After obtaining the stabilising solution $P_d$, derive the feedback gain:
+
+\[
+\boxed{
+K_d=
+(R+B_d^TP_dB_d)^{-1}
+B_d^TP_dA_d
+}.
+\]
+
+Students should report the calculation method (Python/MATLAB or equivalent),
+the obtained $P_d$, and the final gain vector using the convention
+
+\[
+u_k=-K_dx_k .
+\]
+
+
+\begin{table}[H]
+\centering
+\caption{Discrete-design LQR result}
+\label{tab:kd}
+\begin{tabular}{lc}
+\toprule
+Quantity & Numerical result\\
+\midrule
+$P_d$ & \\[1mm]
+$K_{d,\theta}$ & \\
+$K_{d,\dot\theta}$ & \\
+$K_{d,\alpha}$ & \\
+$K_{d,\dot\alpha}$ & \\
+Closed-loop eigenvalues of $A_d-B_dK_d$ & \\
+\bottomrule
+\end{tabular}
+\end{table}
+\subsection{Why the two gains differ}
+
+Explain why solving the CARE before sampling and solving the DARE after ZOH
+discretisation do not generally produce identical gains.
+
+\studenttext{30mm}
+
+\section{Part II: Nonlinear Simulation Results}
+\label{sec:simulation}
+
+\subsection{Common settings and experimental fairness}
+
+List the common initial condition, duration, PWM limit, swing PWM, enter/exit
+angles, soft-blend parameter and the required Class-8 noise settings. Confirm
+that only the LQR gain vector was changed between the two required simulations.
+
+\begin{table}[H]
+\centering
+\caption{Common nonlinear-simulation settings}
+\label{tab:simsettings}
+\begin{tabular}{ll@{\qquad}ll}
+\toprule
+Setting & Value & Setting & Value\\
+\midrule
+Initial condition & & Duration & \\
+PWM limit & & Swing PWM & \\
+Enter angle & & Exit angle & \\
+Soft blend $\lambda$ & & Control interval & \\
+$\theta$ noise $(\mu,\sigma)$ & & $\alpha$ noise $(\mu,\sigma)$ & \\
+PWM noise $(\mu,\sigma)$ & & Number of runs & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Simulation protocol and stable-stage definition}
+
+Evaluate the continuous-design gain $K_c$ and the discrete-design gain $K_d$
+using the same nonlinear simulation environment.
+
+For each controller, complete ten independent simulation runs using one fixed
+set of controller and experiment parameters. Record failed runs as 	exttt{Fail}
+and use ``--'' for unavailable stable-stage quantities; do not replace them with
+additional favourable runs.
+The following settings must remain identical for the two controllers:
+
+\begin{itemize}
+    \item initial condition and simulation duration;
+    \item sampling period;
+    \item swing-up PWM and PWM limit;
+    \item LQR entry and exit angles;
+    \item soft-blend coefficient;
+    \item Gaussian observation-noise and PWM-noise parameters.
+\end{itemize}
+
+Only the LQR gain vector may be changed between the two sets of experiments.
+
+For this report, the final stable stage is defined as the final continuous
+interval during which the pendulum remains inside the LQR stabilization region
+and the controller remains in the pure LQR mode until the end of the run.
+The swing-up stage and the soft-blend transition stage must not be included in
+the stable-stage statistics.
+
+% ----------------------------------------------------------
+
+\subsection{Continuous-design LQR simulation}
+
+Use the continuous-design gain $K_c$ to complete ten independent nonlinear
+simulation runs with fixed parameters.
+
+Save every simulation run as one matched CSV/PNG pair. A recommended naming
+convention is
+
+\begin{center}
+\texttt{lqr\_sim\_continuous\_01.csv}\\
+\texttt{lqr\_sim\_continuous\_01.png}
+\end{center}
+
+and similarly for runs 02--10.
+
+
+\begin{table}[H]
+\centering
+\caption{Ten repeated simulation experiments using the continuous-design gain
+$K_c$.}
+\label{tab:sim_cont_trials}
+\small
+\begin{tabularx}{\linewidth}{c *{6}{>{\centering\arraybackslash}X}}
+\toprule
+Trial & Stable time/s & Mean $|\alpha|$/rad & Std $|\alpha|$/rad
+& Mean $|PWM|$ & Std $|PWM|$ & Max overshoot/rad\\
+\midrule
+1  & -- & -- & -- & -- & -- & --\\
+2  & -- & -- & -- & -- & -- & --\\
+3  & -- & -- & -- & -- & -- & --\\
+4  & -- & -- & -- & -- & -- & --\\
+5  & -- & -- & -- & -- & -- & --\\
+6  & -- & -- & -- & -- & -- & --\\
+7  & -- & -- & -- & -- & -- & --\\
+8  & -- & -- & -- & -- & -- & --\\
+9  & -- & -- & -- & -- & -- & --\\
+10 & -- & -- & -- & -- & -- & --\\
+\midrule
+Across-run mean & -- & -- & -- & -- & -- & --\\
+Across-run std. & -- & -- & -- & -- & -- & --\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+
+
+
+
+% ----------------------------------------------------------
+
+\subsection{Discrete-design LQR simulation}
+
+Replace $K_c$ with the discrete-design gain $K_d$ and repeat the same
+ten-run nonlinear simulation experiment.
+
+All simulation, swing-up and noise settings must remain unchanged.
+
+Save every run as one matched CSV/PNG pair using a naming convention such as
+
+\begin{center}
+\texttt{lqr\_sim\_discrete\_01.csv}\\
+\texttt{lqr\_sim\_discrete\_01.png}
+\end{center}
+
+and similarly for runs 02--10.
+
+
+
+\begin{table}[H]
+\centering
+\caption{Ten repeated simulation experiments using the discrete-design gain
+$K_d$.}
+\label{tab:sim_disc_trials}
+\small
+\begin{tabularx}{\linewidth}{c *{6}{>{\centering\arraybackslash}X}}
+\toprule
+Trial & Stable time/s & Mean $|\alpha|$/rad & Std $|\alpha|$/rad
+& Mean $|PWM|$ & Std $|PWM|$ & Max overshoot/rad\\
+\midrule
+1  & -- & -- & -- & -- & -- & --\\
+2  & -- & -- & -- & -- & -- & --\\
+3  & -- & -- & -- & -- & -- & --\\
+4  & -- & -- & -- & -- & -- & --\\
+5  & -- & -- & -- & -- & -- & --\\
+6  & -- & -- & -- & -- & -- & --\\
+7  & -- & -- & -- & -- & -- & --\\
+8  & -- & -- & -- & -- & -- & --\\
+9  & -- & -- & -- & -- & -- & --\\
+10 & -- & -- & -- & -- & -- & --\\
+\midrule
+Across-run mean & -- & -- & -- & -- & -- & --\\
+Across-run std. & -- & -- & -- & -- & -- & --\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+
+% ----------------------------------------------------------
+
+\subsection{Definition of evaluation metrics}
+
+Use the same definitions as those adopted in Report 1:
+
+\begin{itemize}
+
+    \item \textbf{Stable time}: the time when the pendulum enters the final
+    pure-LQR stabilization stage and remains stable until the end of the run.
+    Samples from the swing-up and soft-blend stages must not be included.
+
+    \item \textbf{Mean $|\alpha|$}: the average absolute pendulum-angle error
+    during the final stable stage,
+
+    \[
+    \operatorname{Mean}|\alpha|
+    =
+    \frac{1}{N_s}
+    \sum_{k\in\mathcal{S}}|\alpha_k|,
+    \]
+
+    where $\mathcal{S}$ denotes the samples in the final stable stage and
+    $N_s$ is the number of samples in that stage.
+
+    \item \textbf{Std $|\alpha|$}: the standard deviation of the absolute
+    pendulum-angle error during the final stable stage,
+
+    \[
+    \operatorname{Std}|\alpha|
+    =
+    \sqrt{
+    \frac{1}{N_s}
+    \sum_{k\in\mathcal{S}}
+    \left(
+    |\alpha_k|-\operatorname{Mean}|\alpha|
+    \right)^2
+    }.
+    \]
+
+    \item \textbf{Mean $|PWM|$}: the average absolute PWM control input during
+    the final stable stage,
+
+    \[
+    \operatorname{Mean}|PWM|
+    =
+    \frac{1}{N_s}
+    \sum_{k\in\mathcal{S}}|PWM_k|.
+    \]
+
+    \item \textbf{Std $|PWM|$}: the standard deviation of the absolute PWM
+    input during the final stable stage. It reflects the fluctuation of the
+    control effort after stabilization.
+
+    \item \textbf{Maximum overshoot}: let $k_s$ denote the final entry
+    into the selected stabilization region. This entry is accepted only when
+    the pendulum remains inside that region until the end of the run. The
+    maximum overshoot is the largest absolute pendulum-angle deviation after
+    this final entry,
+
+    \[
+    \alpha_{\mathrm{OS,max}}
+    =
+    \max_{k\geq k_s}|\alpha_k|.
+    \]
+
+    If the pendulum leaves the stabilization region after an earlier entry,
+    that earlier entry is not used; a later final entry must be identified.
+
+\end{itemize}
+
+The same final stable-stage interval must be used when calculating
+$\operatorname{Mean}|\alpha|$, $\operatorname{Std}|\alpha|$,
+$\operatorname{Mean}|PWM|$, $\operatorname{Std}|PWM|$, and the maximum
+overshoot. The term ``maximum overshoot'' is retained here to denote the
+largest $|\alpha|$ observed after the final accepted entry into the
+stabilization region.
+
+% ----------------------------------------------------------
+
+\subsection{Quantitative continuous-versus-discrete comparison}
+
+For each controller, calculate the mean and standard deviation of every metric
+across the successful runs among the ten fixed-parameter trials. Also state the
+number of successful and failed runs. Report each numerical result in the form
+
+\[
+\text{mean}\pm\text{standard deviation}.
+\]
+
+\begin{table}[H]
+\centering
+\caption{Continuous-design and discrete-design LQR simulation comparison.}
+\label{tab:simcompare}
+\small
+\begin{tabularx}{\linewidth}
+{>{\raggedright\arraybackslash}X
+ >{\centering\arraybackslash}X
+ >{\centering\arraybackslash}X}
+\toprule
+Metric &
+Continuous-design $K_c$ &
+Discrete-design $K_d$\\
+\midrule
+Stable time/s & -- & --\\
+Mean $|\alpha|$/rad & -- & --\\
+Std $|\alpha|$/rad & -- & --\\
+Mean $|PWM|$ & -- & --\\
+Std $|PWM|$ & -- & --\\
+Max overshoot/rad & -- & --\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Discuss which controller performs better in terms of stabilization speed,
+pendulum-angle accuracy, response repeatability, control effort, PWM
+fluctuation and maximum overshoot.
+
+Explain whether the observed difference is practically significant and whether
+it is consistent with the fact that $K_c$ is designed from the continuous
+model, whereas $K_d$ is designed directly from the ZOH-discretised model.
+
+\studenttext{36mm}
+
+\section{Part III: Physical-System LQR Results}
+\label{sec:hardware}
+
+The physical rotary inverted pendulum must be controlled using the
+discrete-design gain $K_d$. Record the exact gain vector sent to the STM32 and
+all relevant experimental settings.
+
+\begin{table}[H]
+\centering
+\caption{Physical-system LQR controller settings.}
+\label{tab:hwsettings}
+\small
+\begin{tabular}{ll@{\qquad}ll}
+\toprule
+Setting & Value & Setting & Value\\
+\midrule
+$K_d$ & & Control frequency & 200 Hz\\
+PWM limit & & Swing PWM & \\
+Enter angle & & Exit angle & \\
+Soft blend $\lambda$ & & Velocity LPF & \\
+Potentiometer upright value & & Downward value & \\
+Motor sign & & Experiment duration & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Complete ten independent physical-system experiments using the same fixed
+controller settings. Do not change $K_d$ or any other controller parameter
+between runs. Record failed runs as 	exttt{Fail} and use ``--'' for unavailable
+stable-stage quantities.
+
+Save every physical experiment as one matched CSV/PNG pair. A recommended
+naming convention is
+
+\begin{center}
+\texttt{lqr\_hardware\_discrete\_01.csv}\\
+\texttt{lqr\_hardware\_discrete\_01.png}
+\end{center}
+
+and similarly for runs 02--10.
+
+The evaluation quantities and stable-stage definition must be identical to
+those used in the simulation section. In particular, the swing-up stage and
+soft-blend transition stage must not be included in the stable-stage
+statistics.
+
+
+
+\begin{table}[H]
+\centering
+\caption{Ten repeated physical-system experiments using the discrete-design
+gain $K_d$.}
+\label{tab:hw_disc_trials}
+\small
+\begin{tabularx}{\linewidth}{c *{6}{>{\centering\arraybackslash}X}}
+\toprule
+Trial & Stable time/s & Mean $|\alpha|$/rad & Std $|\alpha|$/rad
+& Mean $|PWM|$ & Std $|PWM|$ & Max overshoot/rad\\
+\midrule
+1  & -- & -- & -- & -- & -- & --\\
+2  & -- & -- & -- & -- & -- & --\\
+3  & -- & -- & -- & -- & -- & --\\
+4  & -- & -- & -- & -- & -- & --\\
+5  & -- & -- & -- & -- & -- & --\\
+6  & -- & -- & -- & -- & -- & --\\
+7  & -- & -- & -- & -- & -- & --\\
+8  & -- & -- & -- & -- & -- & --\\
+9  & -- & -- & -- & -- & -- & --\\
+10 & -- & -- & -- & -- & -- & --\\
+\midrule
+Across-run mean & -- & -- & -- & -- & -- & --\\
+Across-run std. & -- & -- & -- & -- & -- & --\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Describe and analyse the following physical-system behaviour:
+
+\begin{itemize}
+    \item repeatability across the ten fixed-parameter experiments;
+    \item swing-up and capture behaviour;
+    \item stabilization speed and stable pendulum-angle error;
+    \item rotary-arm drift or excessive arm motion;
+    \item oscillation and sensor-noise effects;
+    \item PWM effort and actuator saturation;
+    \item any unsuccessful capture attempts;
+    \item any manual stop or other safety intervention.
+\end{itemize}
+
+Retain every unsuccessful run among the ten trials, report the total numbers of
+successful and failed runs, and explain the likely causes. If any controller
+parameter is changed, discard the mixed-parameter set and repeat all ten trials
+using one final fixed parameter set.
+
+\studenttext{40mm}
+
+
+\section{Part IV: Sim-to-Real Analysis}
+\label{sec:sim2real}
+
+Compare the discrete-design nonlinear simulation with the physical experiment.
+Use matched $K_d$, PWM limit, switching thresholds, blend and duration wherever
+possible.
+
+\begin{table}[H]
+\centering
+\caption{Matched discrete-LQR simulation and physical-system comparison}
+\label{tab:sim2real}
+\begin{tabular}{lccc}
+\toprule
+Metric & Simulation & Physical system & Relative difference / \%\\
+\midrule
+Stable time / s & & & \\
+Mean $|\alpha|$ / rad & & & \\
+Std. $|\alpha|$ / rad & & & \\
+Mean $|\mathrm{PWM}|$ & & & \\
+Std. $|\mathrm{PWM}|$ & & & \\
+Max overshoot / rad & & & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Explain the discrepancies using evidence from the logs. Consider model-parameter
+error, unmodelled friction, backlash, PWM dead zone, motor saturation,
+potentiometer calibration, encoder resolution, numerical velocity estimation,
+communication/logging effects and trial-to-trial variation. Do not merely state
+that ``the real system has noise.''
+
+\studenttext{55mm}
+
+\section{Part V: LQR versus the Group's Class-8 Dual PID}
+\label{sec:pidcompare}
+
+Use the group's own best Class-8 dual-PID parameters. State them explicitly,
+including both integral gains. If $K_i=0$, convert the PID stabiliser into its
+equivalent full-state feedback vector
+\[
+K_{\mathrm{PID,eq}}=
+[-K_{p,\theta},-K_{d,\theta},-K_{p,\alpha},-K_{d,\alpha}].
+\]
+Explain that this equivalence concerns the local stabilising law; LQR differs in
+how the gain is calculated.
+
+\subsection{Simulation comparison}
+
+Use identical nonlinear-plant, initial-condition and noise settings for LQR and
+PID.
+
+Report each quantitative result in the form
+
+\[
+\text{mean}\pm\text{standard deviation}.
+\]
+
+\begin{table}[H]
+\centering
+\caption{LQR and Class-8 dual-PID simulation comparison}
+\label{tab:lqrpidsim}
+\begin{tabular}{lcc}
+\toprule
+Metric & Discrete LQR & Group's dual PID\\
+\midrule
+Stable time / s & & \\
+Mean stable-stage $|\alpha|$ / rad & & \\
+Std. stable-stage $|\alpha|$ / rad & & \\
+Max overshoot / rad & & \\
+Mean stable-stage $|\mathrm{PWM}|$ & & \\
+Std. stable-stage $|\mathrm{PWM}|$ & & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Let $k_s$ be the final entry into the specified capture region
+$|\alpha|\leq\alpha_{\mathrm{cap}}$. This entry is valid only if the pendulum
+remains inside the region until the end of the run. If it leaves after an
+earlier entry, that earlier entry is rejected and a later final entry is used.
+The reported maximum overshoot is
+
+\[
+\alpha_{\mathrm{OS,max}}=\max_{k\geq k_s}|\alpha_k|.
+\]
+
+\subsection{Physical-system comparison}
+
+Compare the new discrete-LQR physical-system results with the group's own
+Class-8 dual-PID physical-system results.
+
+The comparison must use the same evaluation quantities, final-entry rule and stable-stage definition
+adopted in the previous sections. In particular, the
+stable stage begins at the final entry into the specified stabilization region,
+after which the pendulum remains inside that region until the end of the run.
+Swing-up and soft-blend data must not be included in the stable-stage
+statistics.
+
+Use ten fixed-parameter physical-system runs for each controller and retain any
+failed runs in the record. Calculate the quantitative statistics from the
+successful runs and report each result in the form
+
+\[
+\text{mean}\pm\text{standard deviation}.
+\]
+
+State any unavoidable differences in calibration, sensor condition, initial
+condition, hardware condition, or other experimental settings.
+
+\begin{table}[H]
+\centering
+\caption{LQR and Class-8 dual-PID physical-system comparison}
+\label{tab:lqrpidhw}
+\small
+\begin{tabularx}{\linewidth}
+{>{\raggedright\arraybackslash}X
+ >{\centering\arraybackslash}X
+ >{\centering\arraybackslash}X}
+\toprule
+Metric & Discrete LQR & Group's dual PID\\
+\midrule
+Stable time / s & -- & --\\
+Mean stable-stage $|\alpha|$ / rad & -- & --\\
+Std. stable-stage $|\alpha|$ / rad & -- & --\\
+Max overshoot / rad & -- & --\\
+Mean stable-stage $|\mathrm{PWM}|$ & -- & --\\
+Std. stable-stage $|\mathrm{PWM}|$ & -- & --\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+
+
+Discuss the comparison from both performance and engineering perspectives.
+
+Explain whether the observed differences are practically significant. If the
+two experiments were conducted under different calibration or hardware
+conditions, discuss how these differences may affect the fairness of the
+comparison.
+
+\studenttext{10mm}
+
+
+\section{Part VI: Summary}
+\label{sec:summary}
+
+Summarise the main findings without repeating the entire report. 
+\studenttext{25mm}
+
+
+\end{document}

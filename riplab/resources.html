@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resources · AI-Enabled Control Engineering</title>
+  <meta name="description" content="Course website for AI-Enabled Control Engineering, PKU College of Engineering GLOBEX Summer Program.">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a class="brand" href="index.html" aria-label="Course home">
+      <span class="brand-mark">AI</span>
+      <span class="brand-text">
+        <strong>AI-Enabled Control Engineering</strong>
+        <span>PKU GLOBEX Summer Program</span>
+      </span>
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="lectures.html">Slides</a>
+      <a href="code.html">RIP Code</a>
+      <a href="ros2-platform.html">ROS2 Platform</a>
+      <a href="tasks.html">Lab Tasks</a>
+      <a href="resources.html">Resources</a>
+      <a href="staff.html">Staff</a>
+    </div>
+  </nav>
+</header>
+
+<main class="container">
+
+  <div class="section-head">
+    <div>
+      <h2>Hardware and software resources</h2>
+      <p>Key platform components and recommended workflow for the rotary inverted pendulum laboratory.</p>
+    </div>
+  </div>
+
+  <div class="grid two">
+
+    <article class="card">
+      <div class="kicker">Hardware</div>
+      <h3>Core RIP platform</h3>
+      <p>
+        Rotary inverted pendulum system with STM32F446RE MCU, TB6612FNG motor driver,
+        DC motor, potentiometer, incremental encoder, 12V power input, and PC serial logging.
+      </p>
+      <div class="pill-row">
+        <span class="pill">STM32F446RE</span>
+        <span class="pill">TB6612FNG</span>
+        <span class="pill">Encoder</span>
+        <span class="pill">Potentiometer</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="kicker">Software</div>
+      <h3>Development workflow</h3>
+      <p>
+        Embedded firmware development on STM32, Python-based data logging and analysis,
+        and reinforcement learning pipelines for simulation and policy deployment.
+      </p>
+      <div class="pill-row">
+        <span class="pill">STM32 Firmware</span>
+        <span class="pill">Python</span>
+        <span class="pill">NumPy/SciPy</span>
+        <span class="pill">Gymnasium</span>
+        <span class="pill">Stable-Baselines3</span>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="grid two" style="margin-top:18px">
+
+    <article class="card">
+      <img src="assets/img/wiring.png" alt="Wiring material image">
+      <h3>Wiring and power checks</h3>
+      <p>
+        Before applying motor power, verify VM, VCC, GND, PWMA, AIN1, AIN2, STBY,
+        sensor power, and ensure all grounds are properly connected.
+      </p>
+    </article>
+
+    <article class="card">
+      <img src="assets/img/encoder_ab_phase.png" alt="Encoder A/B phase diagram">
+      <h3>Sensing and logging</h3>
+      <p>
+        Encoder A/B phase signals are used for direction detection.
+        Potentiometer readings are calibrated into angular position estimates for control.
+      </p>
+    </article>
+
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div>
+      <strong>AI-Enabled Control Engineering</strong><br>
+      GLOBEX Summer Program · College of Engineering, Peking University
+    </div>
+    <div>
+      Instructor: Xun Huang · TAs: Zhixiang Ju, Haozhe Wang
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/course-data.js"></script>
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>

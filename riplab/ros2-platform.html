@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ROS2 RIP Platform · AI-Enabled Control Engineering</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/course-data.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <span class="logo">AI</span>
+      <span>
+        <strong>AI-Enabled Control Engineering</strong>
+        <small>PKU GLOBEX Summer Program</small>
+      </span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="lectures.html">Slides</a>
+      <a href="code.html">RIP Code</a>
+      <a href="ros2-platform.html">ROS2 Platform</a>
+      <a href="tasks.html">Lab Tasks</a>
+      <a href="resources.html">Resources</a>
+      <a href="staff.html">Staff</a>
+    </nav>
+  </header>
+
+  <main class="container page ros2-page">
+    <section class="ros2-hero">
+      <span class="kicker">Optional Exploration</span>
+      <h1>ROS2-Based Rotary Inverted Pendulum Platform</h1>
+      <p class="lead">
+        This page is provided for interested students who want to explore how a physical rotary inverted
+        pendulum can be organized as a ROS2 system. It is not required for the core course assessment,
+        but it offers a practical route from embedded control to distributed robotic software.
+      </p>
+      <div class="notice">
+        <strong>Code access.</strong>
+        The ROS2 package is distributed to enrolled students through the course group.
+      </div>
+      <div class="downloads">
+        <a class="download-btn ghost" href="#quick-start">Quick Start</a>
+      </div>
+    </section>
+
+    <section class="ros2-grid">
+      <article class="ros2-card">
+        <h2>Why ROS2?</h2>
+        <p>
+          In the basic RIP experiments, the STM32 board performs real-time sensing and low-level control.
+          ROS2 adds a higher-level software layer on the PC: serial communication, state publishing,
+          command management, visualization, and experiment logging can be separated into independent nodes.
+        </p>
+      </article>
+
+      <article class="ros2-card">
+        <h2>System architecture</h2>
+        <p>
+          The platform follows a PC--STM32 structure. The STM32 sends sensor and controller data through
+          a high-speed serial link. The PC receives these logs, converts them into ROS2 messages, manages
+          commands, and displays real-time 2D/3D visual feedback.
+        </p>
+      </article>
+    </section>
+
+    <section class="ros2-section">
+      <h2>Workspace structure</h2>
+      <div class="module-list">
+        <article>
+          <h3>rip_interfaces</h3>
+          <p>Defines <code>RipState.msg</code> and <code>RipCommand.msg</code> for state feedback and command transmission.</p>
+        </article>
+        <article>
+          <h3>rip_serial_bridge</h3>
+          <p>Reads STM32 serial logs, publishes <code>/rip/state</code>, and forwards start/stop commands to the board.</p>
+        </article>
+        <article>
+          <h3>rip_manager</h3>
+          <p>Provides a management layer for control modes, stable-control settings, and exported RL network headers.</p>
+        </article>
+        <article>
+          <h3>rip_visualizer</h3>
+          <p>Implements the ground-control interface with live angle display, PWM monitoring, plots, and 3D animation.</p>
+        </article>
+        <article>
+          <h3>rip_bringup</h3>
+          <p>Provides the launch file that starts the serial bridge, manager, and visualizer together.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="ros2-section">
+      <h2>ROS2 data flow</h2>
+      <div class="flow">
+        <div>STM32 firmware<br><small>sensor logs / PWM / mode</small></div>
+        <span>→</span>
+        <div>rip_serial_bridge<br><small>serial to ROS2 messages</small></div>
+        <span>→</span>
+        <div>/rip/state<br><small>theta, alpha, velocities, PWM</small></div>
+        <span>→</span>
+        <div>rip_visualizer<br><small>GUI, plots, 3D view</small></div>
+      </div>
+      <p>
+        Commands flow in the reverse direction through <code>/rip/cmd</code> or <code>/rip/raw_cmd</code>.
+        The bridge converts high-level commands such as GO and STOP into serial commands sent to the STM32.
+      </p>
+    </section>
+
+    <section class="ros2-section" id="quick-start">
+      <h2>Quick-start tutorial</h2>
+      <ol class="steps">
+        <li>
+          <strong>Install ROS2 and Python dependencies.</strong>
+          The workspace was prepared for a ROS2 Python workflow. Students should install ROS2, <code>colcon</code>,
+          <code>pyserial</code>, <code>PyQt5</code>, <code>numpy</code>, and <code>matplotlib</code> on the experiment PC.
+        </li>
+        <li>
+          <strong>Obtain and extract the ROS2 code package.</strong>
+          Obtain the package through the course group, then open the included workspace.
+          <pre><code>unzip RIP_ROS2_Optional_Platform_Code.zip
+cd RIP_ROS2_Optional_Platform_Code/ros2/rip_ros2_ws</code></pre>
+        </li>
+        <li>
+          <strong>Build the ROS2 packages.</strong>
+          <pre><code>source /opt/ros/jazzy/setup.bash
+rosdep install --from-paths src --ignore-src -r -y
+colcon build --symlink-install
+source install/setup.bash</code></pre>
+        </li>
+        <li>
+          <strong>Connect the STM32 board.</strong>
+          Check the serial device, for example <code>/dev/ttyACM0</code> or <code>/dev/ttyUSB0</code>.
+          The default launch file uses <code>/dev/ttyACM0</code> and a baud rate of <code>921600</code>.
+        </li>
+        <li>
+          <strong>Launch the platform.</strong>
+          <pre><code>ros2 launch rip_bringup rip.launch.py port:=/dev/ttyACM0 baud:=921600</code></pre>
+        </li>
+        <li>
+          <strong>Observe the state topics.</strong>
+          <pre><code>ros2 topic list
+ros2 topic echo /rip/state</code></pre>
+        </li>
+      </ol>
+    </section>
+
+    <section class="ros2-section warning-panel">
+      <h2>Safety notes</h2>
+      <p>
+        Always keep the rotary arm clear before enabling the motor. Start with a conservative PWM limit,
+        check sensor signs before closing the loop, and use the GUI STOP command immediately if the pendulum
+        falls or the motor response is abnormal. This ROS2 page is intended for exploration and debugging,
+        not for unsupervised operation.
+      </p>
+    </section>
+
+    <section class="ros2-section">
+      <h2>Suggested student exploration</h2>
+      <ul class="clean">
+        <li>Visualize <code>/rip/state</code> and compare ROS2 timestamps with STM32 timing logs.</li>
+        <li>Modify the GUI layout to display only selected variables such as <code>alpha</code>, <code>theta</code>, and <code>pwm</code>.</li>
+        <li>Record data from GO to STOP and generate publication-quality plots for controller comparison.</li>
+        <li>Compare LQR, MPC, and exported RL policies under the same ROS2 logging interface.</li>
+        <li>Extend the workspace for remote experiments, where the RIP hardware stays in the lab while the student monitors data from another computer.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <strong>AI-Enabled Control Engineering</strong>
+    <span>GLOBEX Summer Program · College of Engineering, Peking University</span>
+    <span>Instructor: Xun Huang · TAs: Zhixiang Ju, Haozhe Wang</span>
+  </footer>
+</body>
+</html>

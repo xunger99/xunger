@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home · AI-Enabled Control Engineering</title>
+  <meta name="description" content="Course website for AI-Enabled Control Engineering, PKU College of Engineering GLOBEX Summer Program.">
+  <link rel="stylesheet" href="assets/css/styles.css">
+
+  <style>
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) 360px;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .hero-visual {
+      width: 360px;
+      max-width: 100%;
+      justify-self: end;
+      border-radius: 28px;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 24px 70px rgba(15, 23, 42, 0.18);
+    }
+
+    .hero-video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      background: #000;
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .hero-visual {
+        width: 320px;
+        justify-self: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a class="brand" href="index.html" aria-label="Course home">
+      <span class="brand-mark">AI</span>
+      <span class="brand-text">
+        <strong>AI-Enabled Control Engineering</strong>
+        <span>PKU GLOBEX Summer Program</span>
+      </span>
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="lectures.html">Slides</a>
+      <a href="code.html">RIP Code</a>
+      <a href="ros2-platform.html">ROS2 Platform</a>
+      <a href="tasks.html">Lab Tasks</a>
+      <a href="resources.html">Resources</a>
+      <a href="staff.html">Staff</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+
+    <div>
+      <div class="eyebrow">PKU College of Engineering · GLOBEX</div>
+
+      <h1>AI-Enabled Control Engineering</h1>
+
+      <p>
+        A hands-on summer course connecting control theory and reinforcement learning
+        through physical experimental platforms, including rotary inverted pendulums
+        and quadrotor UAVs.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn primary" href="lectures.html">Download Course Slides</a>
+        <a class="btn" href="code.html">Browse RIP Code Packages</a>
+        <a class="btn" href="schedule.html">View Schedule</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <video
+        class="hero-video"
+        src="assets/vd/ROSRIP_site.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto" style="width:100%; aspect-ratio:862/483; object-fit:cover; display:block; border-radius:18px;">
+      </video>
+<p class="hero-video-caption" style="margin:10px 0 0; text-align:center; font-size:0.95rem; color:#5b6472; line-height:1.6;">
+  ROS2-Based Rotary Inverted Pendulum Experimental Platform: real-time angle acquisition, control command publishing, and dynamic response visualization.
+</p>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="feature-strip">
+  <div class="container stats">
+
+    <div class="stat">
+      <strong>7</strong>
+      <span>hardware and control classes</span>
+    </div>
+
+    <div class="stat">
+      <strong>5+</strong>
+      <span>controller families</span>
+    </div>
+
+    <div class="stat">
+      <strong>1</strong>
+      <span>physical RIP platform</span>
+    </div>
+
+    <div class="stat">
+      <strong>3</strong>
+      <span>RL algorithms: DQN, PPO, TD3</span>
+    </div>
+
+  </div>
+</section>
+
+<main class="container">
+
+  <div class="section-head">
+    <div>
+      <h2>Course overview</h2>
+      <p>
+        The course is organized around the full control engineering pipeline:
+        modeling, sensing, embedded implementation, model-based control, observer design,
+        reinforcement learning, deployment, and hybrid control.
+      </p>
+    </div>
+  </div>
+
+  <div class="grid cards">
+
+    <article class="card">
+      <div class="kicker">Model-based control</div>
+      <h3>LQR and MPC</h3>
+      <p>
+        Students derive and discretize a state-space model, implement LQR and MPC,
+        and compare their hardware behavior under real constraints.
+      </p>
+    </article>
+
+    <article class="card">
+      <div class="kicker">Learning-based control</div>
+      <h3>DQN, PPO, and TD3</h3>
+      <p>
+        Students train reinforcement learning policies in simulation and then study
+        the sim-to-real gap during hardware deployment.
+      </p>
+    </article>
+
+    <article class="card">
+      <div class="kicker">Integrated control</div>
+      <h3>Hybrid and adaptive ideas</h3>
+      <p>
+        The final module combines switching-based hybrid control and residual model
+        correction for improved robustness.
+      </p>
+    </article>
+
+  </div>
+
+</main>
+
+<section class="container">
+
+  <div class="section-head">
+    <div>
+      <h2>Latest lecture materials</h2>
+      <p>Course slides and RIP code packages are available for direct download from this website.</p>
+    </div>
+
+    <a class="btn" href="lectures.html">All slides</a>
+  </div>
+
+  <div class="timeline" data-home-lectures></div>
+
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div>
+      <strong>AI-Enabled Control Engineering</strong><br>
+      GLOBEX Summer Program · College of Engineering, Peking University
+    </div>
+
+    <div>
+      Instructor: Xun Huang · TAs: Zhixiang Ju, Haozhe Wang
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/course-data.js"></script>
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>
