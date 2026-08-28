@@ -1,0 +1,31 @@
+{
+  "title": "AI-Enabled Control Engineering",
+  "program": "GLOBEX Summer Program",
+  "institution": "College of Engineering, Peking University",
+  "instructor": "Xun Huang",
+  "teachingAssistants": [
+    "Zhixiang Ju",
+    "Haozhe Wang"
+  ],
+  "theme": "From model-based optimal control to reinforcement learning on a physical rotary inverted pendulum.",
+  "hardware": [
+    "Rotary inverted pendulum",
+    "STM32F446RE",
+    "TB6612FNG motor driver",
+    "Potentiometer",
+    "Incremental encoder",
+    "DC motor"
+  ],
+  "algorithms": [
+    "System modeling",
+    "LQR",
+    "MPC",
+    "Luenberger observer",
+    "Kalman observer",
+    "DQN",
+    "PPO",
+    "TD3",
+    "Hybrid control",
+    "Residual adaptation"
+  ]
+}

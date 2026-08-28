@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Schedule · AI-Enabled Control Engineering</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/course-data.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <span class="logo">AI</span>
+      <span>
+        <strong>AI-Enabled Control Engineering</strong>
+        <small>PKU GLOBEX Summer Program</small>
+      </span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="lectures.html">Slides</a>
+      <a href="code.html">RIP Code</a>
+      <a href="ros2-platform.html">ROS2 Platform</a>
+      <a href="tasks.html">Lab Tasks</a>
+      <a href="resources.html">Resources</a>
+      <a href="staff.html">Staff</a>
+    </nav>
+  </header>
+
+  <main class="container page">
+    <section class="section-head">
+      <h1>Course schedule</h1>
+      <p>Classes 1--13 contain the main course content. Classes 14--15 are reserved for later release.</p>
+    </section>
+
+    <section class="schedule-panel">
+      <div class="table-wrap">
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Theme</th>
+              <th>Core topics</th>
+              <th>Lab outcome</th>
+              <th>Slides</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+      <tr>
+        <td><strong>Class 1</strong></td>
+        <td>Course Overview and Control Fundamentals</td>
+        <td>Motivation for control engineering and AI-enabled control; Open-loop and closed-loop systems</td>
+        <td>Understand the course workflow, software tools, and final project expectations.</td>
+        <td><a class="download-btn" href="downloads/slides/Lecture01_Course_Overview_and_Control_Fundamentals.pdf" download>Download PDF</a></td>
+      </tr>
+    
+      <tr>
+        <td><strong>Class 2</strong></td>
+        <td>Linear Dynamical Systems and Transfer Functions</td>
+        <td>Linear time-invariant system models; Transfer functions and block diagrams</td>
+        <td>Build simple transfer-function simulations and interpret system responses.</td>
+        <td><a class="download-btn" href="downloads/slides/Lecture02_Linear_Dynamical_Systems_and_Transfer_Functions.pdf" download>Download PDF</a></td>
+      </tr>
+    
+      <tr>
+        <td><strong>Class 3</strong></td>
+        <td>Closed-Loop Stability and Root Locus</td>
+        <td>Closed-loop characteristic equations; Stability and pole locations</td>
+        <td>Analyze closed-loop stability and tune simple feedback controllers.</td>
+        <td><a class="download-btn" href="downloads/slides/Lecture03_Closed_Loop_Stability_and_Root_Locus.pdf" download>Download PDF</a></td>
+      </tr>
+    
+      <tr>
+        <td><strong>Class 4</strong></td>
+        <td>Frequency Response, State Space, and RL Introduction</td>
+        <td>Frequency response and Bode-plot interpretation; State variables and state-space representation</td>
+        <td>Connect transfer-function and state-space viewpoints through examples.</td>
+        <td><a class="download-btn" href="downloads/slides/Lecture04_Frequency_Response_State_Space_and_RL_Introduction.pdf" download>Download PDF</a></td>
+      </tr>
+    
+      <tr>
+        <td><strong>Class 5</strong></td>
+        <td>CartPole Reinforcement Learning and DQN Practice</td>
+        <td>CartPole dynamics and observation/action spaces; Markov decision process formulation</td>
+        <td>Run DQN training and evaluate a CartPole control policy.</td>
+        <td><a class="download-btn" href="downloads/slides/Lecture05_CartPole_RL_and_DQN_Practice.pdf" download>Download PDF</a></td>
+      </tr>
+    
+      <tr>
+        <td><strong>Class 6</strong></td>
+        <td>Overview of Autonomous Quadrotor UAV Research</td>
+        <td>UAV applications and low-altitude economy; basic quadrotor dynamics and underactuation; differential flatness; localization, perception, SLAM, planning, PX4, and AI-based autonomous flight</td>
+        <td>Understand the autonomy stack of quadrotor UAVs and connect perception, planning, and control modules.</td>
+        <td><a class="download-btn" href="downloads/slides/Lecture06_Overview_of_Autonomous_Quadrotor_UAV_Research.pdf" download>Download PDF</a></td>
+      </tr>
+    
+      <tr>
+        <td><strong>Class 7</strong></td>
+        <td>RIP Hardware Introduction and Dynamic Analysis</td>
+        <td>RIP mechanical structure, rotary arm, pendulum link, DC motor, and driver; Potentiometer and encoder signals for angle measurement</td>
+        <td>Inspect the RIP hardware platform, identify sensor and actuator connections, derive the main state variables, and connect the physical system to its dynamic model.</td>
+        <td><a class="download-btn" href="downloads/slides/Lecture07_RIP_Modeling_Hardware_and_STM32_Setup.pdf" download>Download PDF</a></td>
+      </tr>
+    
+      <tr>
+        <td><strong>Class 8</strong></td>
+        <td>Hardware Assembly, Sensor Test, and Bellman Bridge</td>
+        <td>PC--STM32--TB6612--motor--sensor wiring; Potentiometer and encoder signal tests</td>
+        <td>Run sensor and motor tests and collect calibrated experimental data.</td>
+        <td><a class="download-btn" href="downloads/manuals/RIP_Class8_Hardware_Wiring_Guide.pdf" download>Download PDF</a></td>
+      </tr>
+    
+      <tr>
+        <td><strong>Class 9</strong></td>
+        <td>Optimal Control Experiments on RIP</td>
+        <td>State feedback and LQR design; MPC prediction model and constraints</td>
+        <td>Run LQR and MPC experiments and compare time-domain responses.</td>
+        <td><a class="download-btn" href="downloads/manuals/RIP_Class9_LQR_Technical_Manual.pdf" download>Download PDF</a></td>
+      </tr>
+    
+      <tr>
+        <td><strong>Class 10</strong></td>
+        <td>State Observers for RIP Control</td>
+        <td>Measured and estimated states; Luenberger observer</td>
+        <td>Compare direct numerical derivatives with observer-estimated states.</td>
+        <td><a class="download-btn" href="downloads/manuals/RIP_Class10_MPC_Technical_Manual.pdf" download>Download PDF</a></td>
+      </tr>
+    
+      <tr>
+        <td><strong>Class 11</strong></td>
+        <td>DQN, PPO, and TD3 RIP Simulation Training</td>
+        <td>DQN, PPO, and TD3 algorithm overview; Custom RIP simulation environment</td>
+        <td>Train and evaluate RL policies in simulation.</td>
+        <td><a class="download-btn" href="downloads/manuals/RIP_Class11_DQN_Technical_Manual.pdf" download>Download PDF</a></td>
+      </tr>
+    
+      <tr>
+        <td><strong>Class 12</strong></td>
+        <td>RL Sim-to-Real Deployment</td>
+        <td>Policy export and embedded deployment; STM32 firmware integration</td>
+        <td>Deploy trained policies and record sim-to-real experimental data.</td>
+        <td><a class="download-btn" href="downloads/manuals/RIP_Class12_PPO_Technical_Manual.pdf" download>Download PDF</a></td>
+      </tr>
+    
+      <tr>
+        <td><strong>Class 13</strong></td>
+        <td>Hybrid Control, Sim-to-Real Improvement, and Final Demo</td>
+        <td>Hybrid control architecture; Model-based controller and RL policy comparison</td>
+        <td>Complete the final demonstration and compare control strategies.</td>
+        <td><a class="download-btn" href="downloads/manuals/RIP_Class13_TD3_Technical_Manual.pdf" download>Download PDF</a></td>
+      </tr>
+    
+      <tr>
+        <td><strong>Class 14</strong></td>
+        <td>Reserved Session</td>
+        <td>Additional experiment or project discussion; To be announced</td>
+        <td>Reserved for later release.</td>
+        <td><span class="download-btn disabled">Reserved</span></td>
+      </tr>
+    
+      <tr>
+        <td><strong>Class 15</strong></td>
+        <td>Reserved Session</td>
+        <td>Final extension or presentation session; To be announced</td>
+        <td>Reserved for later release.</td>
+        <td><span class="download-btn disabled">Reserved</span></td>
+      </tr>
+    
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <strong>AI-Enabled Control Engineering</strong>
+    <span>GLOBEX Summer Program · College of Engineering, Peking University</span>
+    <span>Instructor: Xun Huang · TAs: Zhixiang Ju, Haozhe Wang</span>
+  </footer>
+</body>
+</html>

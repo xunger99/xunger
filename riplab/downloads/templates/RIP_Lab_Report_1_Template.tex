@@ -1,0 +1,808 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,top=18mm,bottom=18mm,left=20mm,right=20mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{newtxtext,newtxmath}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{siunitx}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage[most]{tcolorbox}
+\usepackage{setspace}
+\usepackage{titlesec}
+
+\definecolor{TAblue}{HTML}{174A7E}
+\definecolor{TAred}{HTML}{A61B1B}
+\definecolor{TAgray}{HTML}{F3F4F6}
+\definecolor{TAgreen}{HTML}{205C3B}
+
+\hypersetup{colorlinks=true,linkcolor=TAblue,urlcolor=TAblue,citecolor=TAblue}
+\setstretch{1.08}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlist[itemize]{leftmargin=5mm,itemsep=1pt,topsep=2pt}
+\setlist[enumerate]{leftmargin=7mm,itemsep=2pt,topsep=2pt}
+\captionsetup{font=small,labelfont=bf}
+\titleformat{\section}{\large\bfseries\color{TAblue}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.5em}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Rotary Inverted Pendulum - Laboratory Report 1}
+\rhead{Group \GroupNumber}
+\cfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}\setlength{\headheight}{14pt}
+
+\newcommand{\CourseName}{AI-Enabled Control Engineering}
+\newcommand{\ReportTitle}{Laboratory Report 1: Dual-Loop PID Control and Sim-to-Real Evaluation}
+\newcommand{\GroupNumber}{XX}
+\newcommand{\StudentNames}{Student A, Student B, Student C}
+\newcommand{\StudentIDs}{ID A, ID B, ID C}
+\newcommand{\SubmissionDate}{YYYY-MM-DD}
+\newcommand{\figdir}{../figures}
+
+
+\newif\ifinstructions
+
+
+
+
+
+%================================================================
+% Keep this TRUE while reading the requirements.
+% Change it to \instructionsfalse before submitting the final report.
+\instructionstrue
+
+%================================================================
+
+
+
+
+
+
+
+
+\newtcolorbox{requirementbox}[1][]{
+  colback=TAgray,colframe=TAblue,boxrule=0.7pt,arc=1mm,
+  left=2mm,right=2mm,top=1.5mm,bottom=1.5mm,#1}
+\newtcolorbox{warningbox}{
+  colback=red!4,colframe=TAred,boxrule=0.8pt,arc=1mm,
+  left=2mm,right=2mm,top=1.5mm,bottom=1.5mm}
+\newtcolorbox{studentbox}{
+  colback=white,colframe=black!40,boxrule=0.5pt,arc=0mm,
+  left=2mm,right=2mm,top=1.5mm,bottom=1.5mm}
+
+\newcommand{\resultpanel}[2]{%
+\begin{minipage}[t]{0.32\linewidth}
+\centering
+\IfFileExists{#1}{\includegraphics[width=\linewidth]{#1}}{%
+\fbox{\parbox[c][34mm][c]{0.94\linewidth}{\centering\small Insert\\\texttt{\detokenize{#1}}}}}
+\\[-1mm]{\scriptsize #2}
+\end{minipage}}
+
+\newcommand{\studenttext}[1]{\begin{studentbox}\vspace{#1}\end{studentbox}}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{15mm}
+{\Large\bfseries \CourseName\par}
+\vspace{13mm}
+{\huge\bfseries\color{TAblue} \ReportTitle\par}
+\vspace{18mm}
+\begin{tabular}{>{\bfseries}rl}
+Group: & \GroupNumber\\[2mm]
+Students: & \StudentNames\\[2mm]
+Student IDs: & \StudentIDs\\[2mm]
+Submission date: & \SubmissionDate
+\end{tabular}
+\vfill
+\begin{tcolorbox}[width=0.84\linewidth,colback=TAgray,colframe=TAblue]
+\centering
+\textbf{Target report length: in 10 pages, including the title page and references.}\\
+Raw CSV logs and original figures are submitted separately in the same ZIP package.
+\end{tcolorbox}
+\vspace{8mm}
+{\small Teaching Assistant: Zhixiang Ju ，Haozhe Wang}
+\end{titlepage}
+
+\ifinstructions
+\section*{Submission Requirements - Remove Before Final Submission}
+\addcontentsline{toc}{section}{Submission Requirements}
+
+\begin{warningbox}
+Before submitting, change \verb|\instructionstrue| to \verb|\instructionsfalse| near the beginning of this file. This removes all requirement pages automatically. The final report should contain only your own report.
+\end{warningbox}
+
+\begin{requirementbox}
+\textbf{Required submission package}
+
+Submit one ZIP file named:
+\begin{center}
+\texttt{GroupXX\_LabReport1.zip}
+\end{center}
+It must contain:
+\begin{verbatim}
+GroupXX_LabReport1.zip
+|-- GroupXX_LabReport1.pdf
+|-- data/
+|   `-- all original CSV logs
+`-- figures/
+    `-- one original PNG figure for every CSV log
+\end{verbatim}
+The PDF, CSV logs and PNG figures must open correctly. Do not submit screenshots of CSV files.
+\end{requirementbox}
+
+\begin{requirementbox}
+\textbf{One-to-one file correspondence}
+
+Every run must have exactly one CSV log and one original figure with the same identifier. Use naming convention like this:
+\begin{itemize}
+\item Part 1 hardware: \texttt{P1\_HW\_BEST\_R1.csv} and \texttt{P1\_HW\_BEST\_R1.png}
+\item Part 1 simulation: \texttt{P1\_SIM\_BEST\_R1.csv} and \texttt{P1\_SIM\_BEST\_R1.png}
+\item Part 2 example: \texttt{P2\_KPA\_LOW\_R2.csv} and \texttt{P2\_KPA\_LOW\_R2.png}
+\end{itemize}
+Use \texttt{R1}, \texttt{R2}, and \texttt{R3} for the three repeated trials. The identifiers used in the report, figure captions, tables, CSV files and PNG files must agree exactly.
+\end{requirementbox}
+
+
+
+\begin{requirementbox}
+\textbf{Experimental repetition}
+
+Do not report only the best run. Report all 10 successful runs and calculate the mean and standard deviation across the 10 runs.
+
+For the Sim-to-Real comparison, the controller parameters and experimental settings used in the simulation must be exactly the same as those used on the physical system. Only with matched parameters can the difference between simulation and real-world performance be meaningfully evaluated.
+\end{requirementbox}
+
+\begin{requirementbox}
+\textbf{Template usage}
+
+The provided report template is only a formatting reference. All instructions,
+placeholder texts, examples, and guidance notes in the template must be removed
+before submission.
+
+Students should replace the template contents with their own experimental
+results, analysis, and discussion. Simply filling in the blank fields without
+removing the provided instructions will not be considered a complete report.
+
+Please note that this template is only a minimum structure to help organize the
+report. It does not provide all possible figures, plots, or analysis methods.
+Students are encouraged to improve the presentation and include additional
+visualizations, diagrams, data analysis plots, or illustrations when
+appropriate.
+
+Well-designed figures that clearly explain experimental results, reveal
+important trends, or improve the readability of the report are highly
+encouraged. High-quality scientific presentation and additional meaningful
+analysis will be considered positively during grading.
+\end{requirementbox}
+\begin{requirementbox}
+\textbf{Individual submission}
+
+
+
+Members of the same group may share the physical-system experimental data
+collected together. However, simulation data must not be shared. Each student
+must independently conduct the required simulation experiments and complete
+their own Sim-to-Real analysis.
+
+Each student must submit an individual report zip. Reports with substantially
+identical simulation results, analysis, or written content will not be accepted
+as independent submissions.
+\end{requirementbox}
+
+\begin{requirementbox}
+\textbf{Bonus credit}
+
+Students are strongly encouraged to complete the optional bonus section. The
+bonus may contribute up to an additional 10\% of the marks available for this
+laboratory report. Therefore, the final mark for this report may exceed its
+nominal full mark.
+\end{requirementbox}
+
+\begin{requirementbox}
+\textbf{Formatting and grading expectations}
+
+The provided font, spacing, margins, table style, caption style and section hierarchy should be retained as closely as possible. Formatting quality is part of the assessment. Figures must be readable, numbered, discussed in the text and accompanied by units. Tables must not contain unexplained symbols.
+
+Grading reference:
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+Item & Weight\\
+\midrule
+Formatting, organization and file completeness & 10\%\\
+Method and controller description & 10\%\\
+Part 1 hardware results and repeated-trial analysis & 25\%\\
+Part 1 digital-twin comparison and sim-to-real discussion & 25\%\\
+Part 2 parameter-sensitivity experiments & 25\%\\
+Critical discussion, limitations and conclusion & 5\%\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{requirementbox}
+\clearpage
+\fi
+
+\tableofcontents
+\clearpage
+
+% ==========================================================
+\section{Method and Controller Description}
+\label{sec:method}
+
+Before conducting physical experiments, first introduce the
+control strategy used in this laboratory. The rotary inverted pendulum is an
+underactuated nonlinear system. The controller contains two main stages:
+
+\begin{enumerate}
+    \item Energy-based swing-up control, which increases the pendulum energy
+    and moves the pendulum from the hanging-down position to the upright region.
+    \item Dual-loop PID stabilization, which stabilizes the pendulum after it
+    enters the neighbourhood of the upright equilibrium.
+\end{enumerate}
+
+ explain the working principles of both controllers and discuss
+how the controller parameters affect the system performance.
+
+% ----------------------------------------------------------
+
+\subsection{Energy-based Swing-up Control}
+
+The pendulum cannot be stabilized directly when it starts from the downward
+position because the upright equilibrium is unstable and the available motor
+torque is limited. Therefore, an energy-based controller is first used to
+inject energy into the pendulum.
+
+The mechanical energy of the pendulum can be written as
+
+\[
+E =
+\frac{1}{2}J\dot{\alpha}^{2}
++
+mgl(1-\cos\alpha),
+\]
+
+where $J$ is the equivalent rotational inertia, $m$ is the pendulum mass,
+$l$ is the pendulum length, and $\alpha$ is the pendulum angle.
+
+The desired energy corresponding to the upright position is denoted as
+$E_d$. The energy error is
+
+\[
+e_E=E_d-E .
+\]
+
+A typical energy-based swing-up controller has the form
+
+\[
+u_{\mathrm{swing}}
+=
+k_E e_E
+\operatorname{sign}(\dot{\alpha}\cos\alpha),
+\]
+
+where $k_E$ is the energy control gain.
+
+Explain why the term
+
+\[
+\operatorname{sign}(\dot{\alpha}\cos\alpha)
+\]
+
+is required. Discuss how this term determines the direction of the motor
+torque.
+
+\vspace{0.2cm}
+
+\textbf{Theory questions:}
+
+\begin{enumerate}[label=(\alph*),leftmargin=0.8cm]
+
+
+
+\item Explain why the energy-based
+controller alone is not suitable for precise stabilization.
+
+\item Assume the pendulum starts from the downward position. Describe the
+energy variation during one swing cycle and explain how repeated control
+actions finally move the pendulum into the upright region.
+
+\end{enumerate}
+
+
+% ----------------------------------------------------------
+
+\subsection{Dual-loop PID Stabilization}
+
+After the pendulum enters the capture region around the upright equilibrium,
+the controller switches to a dual-loop PID controller.
+
+The inner loop controls the pendulum angle:
+
+\[
+u_{\alpha}
+=
+K_{p\alpha}e_{\alpha}
++
+K_{i\alpha}\int e_{\alpha}dt
++
+K_{d\alpha}\dot{e}_{\alpha},
+\]
+
+where
+
+\[
+e_{\alpha}=\alpha_{\mathrm{ref}}-\alpha .
+\]
+
+The outer loop controls the rotary arm position:
+
+\[
+u_{\theta}
+=
+K_{p\theta}e_{\theta}
++
+K_{i\theta}\int e_{\theta}dt
++
+K_{d\theta}\dot{e}_{\theta}.
+\]
+
+The final control input is obtained by combining the two loops:
+
+\[
+u_{\mathrm{PID}}=u_{\alpha}+u_{\theta}.
+\]
+
+Students should explain the purpose of using two control loops instead of
+only controlling the pendulum angle.
+
+\vspace{0.2cm}
+
+\textbf{Theory questions:}
+
+\begin{enumerate}[label=(\alph*),leftmargin=0.8cm]
+
+\item Explain the role of each PID term:
+
+\[
+K_p,\qquad K_i,\qquad K_d .
+\]
+
+\item Discuss the expected influence of increasing $K_{p\alpha}$ on:
+\begin{itemize}
+    \item stabilization speed;
+    \item oscillation amplitude;
+    \item motor PWM variation.
+\end{itemize}
+
+\item Explain why an excessively large integral gain $K_i$ may cause poor
+performance or actuator saturation.
+
+\item Explain the purpose of the velocity low-pass filter and the possible
+trade-off between noise reduction and control delay.
+
+\end{enumerate}
+
+
+% ----------------------------------------------------------
+
+\subsection{Simulation and Physical Implementation}
+
+Before physical experiments, the controller should be tested in the simulation
+environment developed in the previous laboratory session.
+
+Discuss:
+
+\begin{itemize}
+    \item why simulation is useful before hardware deployment;
+    \item possible reasons why the physical system may perform differently from the simulation.
+\end{itemize}
+
+
+
+% ==========================================================
+\section{Part I: Best Physical Controller and Sim-to-Real Comparison}
+\label{sec:part1}
+
+\subsection{Best Physical Controller Parameter Set}
+
+First, find a controller parameter set that provides the best overall
+performance on the physical rotary inverted pendulum system.
+
+The selected parameter set should provide a good balance between:
+
+\begin{itemize}
+    \item reliable energy-based swing-up;
+    \item fast transition into the PID stabilization region;
+    \item small pendulum angle error;
+    \item limited rotary-arm movement;
+    \item smooth PWM output without excessive saturation.
+\end{itemize}
+
+Report all parameters entered in the Python control panel.
+
+\begin{table}[H]
+\centering
+\caption{Best physical controller and calibration parameters.}
+\label{tab:best_parameters}
+\small
+\begin{tabularx}{\linewidth}{l S[table-format=4.3] l l S[table-format=4.3] l}
+\toprule
+Parameter & {Value} & Unit & Parameter & {Value} & Unit\\
+\midrule
+Duration & 0 & s & PWM maximum & 0 & PWM\\
+Swing-up PWM & 0 & PWM & PID entry angle & 0 & deg\\
+PID exit angle & 0 & deg & Soft blend $\lambda$ & 0 & --\\
+$K_{p\alpha}$ & 0 & -- & $K_{i\alpha}$ & 0 & --\\
+$K_{d\alpha}$ & 0 & -- & $K_{p\theta}$ & 0 & --\\
+$K_{i\theta}$ & 0 & -- & $K_{d\theta}$ & 0 & --\\
+$\alpha$ integral limit & 0 & -- & $\theta$ integral limit & 0 & --\\
+Velocity LPF & 0 & -- & Calibration values & 0 & --\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Explain the parameter tuning procedure. Discuss why the selected parameter
+set was considered the best compromise rather than simply the parameter set
+with the fastest swing-up or the smallest instantaneous angle error.
+
+
+\subsection{Repeated Physical Experiments}
+
+Using the selected best parameter set, perform \textbf{ten independent physical
+experiments}. These ten trials will be used as the final hardware performance
+evaluation.
+
+Do not select only the best trial. Report all ten experimental results.
+
+For each trial, save:
+
+\begin{itemize}
+    \item one original CSV log file;
+    \item one original PNG figure generated from the log file.
+\end{itemize}
+
+The CSV and PNG files must have exactly matching identifiers.
+
+Recommended naming convention:
+
+\begin{center}
+\texttt{dual\_pid\_real\_best\_01.csv}\\
+\texttt{dual\_pid\_real\_best\_01.png}
+\end{center}
+
+and similarly for trials 02--10.
+
+
+\begin{table}[H]
+\centering
+\caption{Ten repeated physical experiments using the best controller parameters.}
+\label{tab:real_trials}
+\small
+\begin{tabularx}{\linewidth}{c *{6}{>{\centering\arraybackslash}X}}
+\toprule
+Trial & Stable time/s & Mean $|\alpha|$/rad & Std $|\alpha|$/rad
+& Mean $|PWM|$ & Std $|PWM|$ & Max overshoot/rad\\
+\midrule
+1 & -- & -- & -- & -- & -- & --\\
+2 & -- & -- & -- & -- & -- & --\\
+3 & -- & -- & -- & -- & -- & --\\
+4 & -- & -- & -- & -- & -- & --\\
+5 & -- & -- & -- & -- & -- & --\\
+6 & -- & -- & -- & -- & -- & --\\
+7 & -- & -- & -- & -- & -- & --\\
+8 & -- & -- & -- & -- & -- & --\\
+9 & -- & -- & -- & -- & -- & --\\
+10 & -- & -- & -- & -- & -- & --\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+
+Define the following evaluation metrics:
+
+\begin{itemize}
+    \item \textbf{Stable time}: the time when the pendulum first enters the
+    PID stabilization region and remains stable until the end of the trial.
+    
+    \item \textbf{Mean $|\alpha|$}: average absolute pendulum angle error
+    during the final stable stage.
+    
+    \item \textbf{Std $|\alpha|$}: standard deviation of the absolute angle
+    error during the final stable stage.
+    
+    \item \textbf{Mean and Std $|PWM|$}: describe the average control effort
+    and PWM fluctuation during the stable stage.
+    
+    \item \textbf{Maximum overshoot}: after the final transition into the
+    PID region, record the maximum deviation of the pendulum angle from the
+    upright position.
+\end{itemize}
+
+
+\subsection{Simulation Twin Experiments with Matched Controller Parameters}
+
+Use the simulation twin to reproduce the best physical experiment as closely
+as possible.
+
+All controller and experimental parameters must remain identical to those used
+on the physical system, including:
+
+\begin{itemize}
+    \item experiment duration;
+    \item pendulum and rotary-arm PID gains;
+    \item swing-up PWM;
+    \item PWM limit;
+    \item PID entry and exit angles;
+    \item soft-blend coefficient $\lambda$;
+    \item integral limits;
+    \item initial pendulum condition.
+\end{itemize}
+
+
+Save every simulation trial as one matched CSV/PNG pair using:
+
+\begin{center}
+\texttt{dual\_pid\_sim\_best\_01.csv}\\
+\texttt{dual\_pid\_sim\_best\_01.png}
+\end{center}
+
+and continue the numbering from 02 to 10.
+
+Calculate the same metrics used for the physical experiments.
+
+\begin{table}[H]
+\centering
+\caption{Ten repeated simulation-twin experiments using matched controller parameters and one fixed noise configuration.}
+\label{tab:sim_trials}
+\small
+\begin{tabularx}{\linewidth}{c *{6}{>{\centering\arraybackslash}X}}
+\toprule
+Trial & Stable time/s & Mean $|\alpha|$/rad & Std $|\alpha|$/rad
+& Mean $|PWM|$ & Std $|PWM|$ & Max overshoot/rad\\
+\midrule
+1  & -- & -- & -- & -- & -- & --\\
+2  & -- & -- & -- & -- & -- & --\\
+3  & -- & -- & -- & -- & -- & --\\
+4  & -- & -- & -- & -- & -- & --\\
+5  & -- & -- & -- & -- & -- & --\\
+6  & -- & -- & -- & -- & -- & --\\
+7  & -- & -- & -- & -- & -- & --\\
+8  & -- & -- & -- & -- & -- & --\\
+9  & -- & -- & -- & -- & -- & --\\
+10 & -- & -- & -- & -- & -- & --\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Report the mean and standard deviation across the ten simulation runs.
+Compare the distribution of the simulation results with the ten physical
+results rather than comparing only one simulation run with one physical run.
+
+
+
+(\textbf{Bonus: up to 5\% additional credit for this laboratory report})
+
+
+The controller parameters must not be retuned specifically for the simulation.
+The only simulation-specific parameters that may be adjusted are the noise
+parameters.
+
+Select one set of simulation noise parameters that makes the simulated
+responses reproduce the physical responses as closely as possible. The noise
+model may include:
+
+\begin{itemize}
+    \item rotary-arm observation-noise mean and standard deviation;
+    \item pendulum-angle observation-noise mean and standard deviation;
+    \item PWM output-noise mean and standard deviation.
+\end{itemize}
+
+Report the selected noise parameters in Table~\ref{tab:sim_noise}.
+
+\begin{table}[H]
+\centering
+\caption{Noise parameters used in the simulation twin.}
+\label{tab:sim_noise}
+\small
+\begin{tabularx}{0.78\linewidth}{l c l}
+\toprule
+Noise parameter & Value & Unit\\
+\midrule
+$\mu_{\theta}$ & -- & rad\\
+$\sigma_{\theta}$ & -- & rad\\
+$\mu_{\alpha}$ & -- & rad\\
+$\sigma_{\alpha}$ & -- & rad\\
+$\mu_{\mathrm{PWM}}$ & -- & PWM\\
+$\sigma_{\mathrm{PWM}}$ & -- & PWM\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Explain how the noise parameters were selected. The objective is to reduce
+the Sim-to-Real gap in several metrics simultaneously rather than matching
+only one individual physical trial.
+
+After fixing the noise parameters, do not change them again. Run the
+simulation twin ten independent times using different random-noise
+realizations.
+
+\subsection{Sim-to-Real Analysis}
+
+Compare the mean results obtained from the ten physical experiments and the ten
+simulation experiments.
+
+For each performance metric \(m\), calculate the absolute difference
+
+\begin{equation}
+\Delta m
+=
+\left|
+\bar{m}_{\mathrm{real}}
+-
+\bar{m}_{\mathrm{sim}}
+\right|,
+\end{equation}
+
+and the Sim-to-Real gap ratio
+
+\begin{equation}
+G_m
+=
+\frac{
+\left|
+\bar{m}_{\mathrm{real}}
+-
+\bar{m}_{\mathrm{sim}}
+\right|}
+{\max\left(
+\left|\bar{m}_{\mathrm{real}}\right|,
+\varepsilon
+\right)}
+\times 100\%,
+\end{equation}
+
+where \(\varepsilon\) is a small positive value used to avoid division by zero.
+
+The stable time \(t_s\) is the time at which the pendulum enters the final
+continuous stable stage and remains within \(15^\circ\) of the upright position
+until the end of the experiment. It may also be interpreted as the swing-up
+time.
+
+\begin{table}[H]
+\centering
+\caption{Quantitative Sim-to-Real comparison using the mean values from ten trials.}
+\label{tab:sim2real}
+\small
+\begin{tabularx}{\linewidth}
+{l
+ >{\centering\arraybackslash}X
+ >{\centering\arraybackslash}X
+ >{\centering\arraybackslash}X
+ >{\centering\arraybackslash}X}
+\toprule
+Metric
+& Real system
+& Simulation twin
+& Difference \(\Delta m\)
+& Sim-to-Real gap \(G_m\) / \%\\
+\midrule
+Stable time \(t_s\) / s
+& -- & -- & -- & --\\
+
+Mean \( |\alpha| \) / rad
+& -- & -- & -- & --\\
+
+Std. \( |\alpha| \) / rad
+& -- & -- & -- & --\\
+
+Mean \( |\mathrm{PWM}| \)
+& -- & -- & -- & --\\
+
+Std. \( |\mathrm{PWM}| \)
+& -- & -- & -- & --\\
+
+Maximum stable-stage overshoot / rad
+& -- & -- & -- & --\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Briefly discuss which metrics show the smallest and largest Sim-to-Real gaps.
+Possible causes include friction, mechanical backlash, motor dead zone, sensor
+noise, calibration error, voltage variation and unmodelled dynamics.
+
+% ==========================================================
+\section{Part II: Controller Parameter Sensitivity Analysis}
+\label{sec:part2}
+
+Starting from the best parameter set obtained in Part I, investigate how
+different controller parameters influence the physical control performance.
+
+Only change one parameter at a time and keep all other parameters unchanged.
+
+Each selected parameter value should first be tested in simulation before
+being deployed to the physical system.
+
+
+Suggested parameters:
+
+\begin{itemize}
+    \item pendulum proportional gain $K_{p\alpha}$;
+    \item pendulum derivative gain $K_{d\alpha}$;
+    \item soft-blend coefficient $\lambda$;
+    \item velocity low-pass filter coefficient.
+\end{itemize}
+
+For each parameter:
+
+\begin{itemize}
+    \item select at least three different values;
+    \item perform repeated physical experiments;
+    \item save all CSV and PNG files;
+    \item explain the influence on stability, angle error and PWM behaviour.
+\end{itemize}
+
+
+\subsection{Parameter Influence Discussion}
+
+For each parameter, discuss:
+
+\begin{itemize}
+    \item How does increasing the parameter change the transient response?
+    \item Does it improve stability or introduce oscillation?
+    \item Does it increase PWM fluctuation or saturation?
+    \item Is the observed behaviour consistent with PID theory?
+\end{itemize}
+
+
+% ==========================================================
+\section{Data-driven Parameter Investigation (Bonus)}
+(\textbf{Bonus: up to 5\% additional credit for this laboratory report})
+
+
+Choose one parameter that you consider most important for rotary inverted
+pendulum control.
+
+Collect multiple tuning attempts and analyse the relationship between the
+parameter value and control performance.
+
+The analysis should include:
+
+\begin{itemize}
+    \item parameter value;
+    \item CSV data;
+    \item control performance metrics;
+    \item explanation of the observed trend.
+\end{itemize}
+
+The goal is to demonstrate a systematic tuning process rather than trial and
+error.
+
+
+\section{Discussion, Limitations ， Optional Extension and Conclusion}
+Synthesize Parts I and II rather than repeating individual observations. Address repeatability, failure cases, reliability of the selected metrics and whether the digital twin is sufficiently accurate for safe pre-tuning.
+
+Optional extension ideas include sensitivity to $K_{d\alpha}$, $K_{p\theta}$ or the velocity-LPF coefficient; comparison of capture-time distributions; or a simple calibrated correction to reduce one observed sim-to-real gap. Optional experiments should not replace any required experiment.State the best physical parameter set, the main sim-to-real discrepancy, the parameter with the strongest observed influence and one concrete recommendation for future controller deployment.
+
+\studenttext{50mm}
+
+
+
+
+\end{document}
