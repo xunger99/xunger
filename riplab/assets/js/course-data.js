@@ -244,7 +244,86 @@ window.COURSE_DATA = {
       "id": "lecture-15"
     }
   ],
-  "codePackages": [],
+  "codePackages": [
+    {
+      "classNo": 8,
+      "title": "Dual-Loop PID",
+      "description": "RIP simulation, Python hardware interface, and microcontroller firmware for the dual-loop PID experiment.",
+      "tags": [
+        "PID",
+        "STM32",
+        "Python",
+        "Simulation"
+      ],
+      "file": "downloads/code/RIP_Class08_Dual_Loop_PID_Code.zip",
+      "size": 38139
+    },
+    {
+      "classNo": 9,
+      "title": "Linear Quadratic Regulator",
+      "description": "LQR simulation, Python hardware interface, and microcontroller firmware for optimal-control experiments.",
+      "tags": [
+        "LQR",
+        "STM32",
+        "Python",
+        "Optimal control"
+      ],
+      "file": "downloads/code/RIP_Class09_LQR_Code.zip",
+      "size": 37253
+    },
+    {
+      "classNo": 10,
+      "title": "Model Predictive Control",
+      "description": "MPC simulation, Python hardware interface, and microcontroller firmware for prediction-based control experiments.",
+      "tags": [
+        "MPC",
+        "STM32",
+        "Python",
+        "Predictive control"
+      ],
+      "file": "downloads/code/RIP_Class10_MPC_Code.zip",
+      "size": 42878
+    },
+    {
+      "classNo": 11,
+      "title": "Deep Q-Network",
+      "description": "DQN simulation training, policy evaluation, hardware deployment scripts, and matching firmware.",
+      "tags": [
+        "DQN",
+        "Reinforcement learning",
+        "Deployment",
+        "STM32"
+      ],
+      "file": "downloads/code/RIP_Class11_DQN_Code.zip",
+      "size": 1321514
+    },
+    {
+      "classNo": 12,
+      "title": "Proximal Policy Optimization",
+      "description": "PPO simulation training, policy evaluation, hardware deployment scripts, and matching firmware.",
+      "tags": [
+        "PPO",
+        "Reinforcement learning",
+        "Deployment",
+        "STM32"
+      ],
+      "file": "downloads/code/RIP_Class12_PPO_Code.zip",
+      "size": 1322325
+    },
+    {
+      "classNo": 13,
+      "title": "Twin Delayed DDPG",
+      "description": "TD3 simulation training, policy evaluation, compatibility checks, hardware deployment scripts, and firmware.",
+      "tags": [
+        "TD3",
+        "Reinforcement learning",
+        "Deployment",
+        "STM32"
+      ],
+      "file": "downloads/code/RIP_Class13_TD3_Code.zip",
+      "size": 1331145
+    }
+  ],
   "tasks": [
     {
       "classNo": 5,

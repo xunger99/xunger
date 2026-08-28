@@ -32,7 +32,8 @@ open http://localhost:8000
 
 - Edit `data/lectures.json` for lecture titles, descriptions, and slide links.
 - Add PDFs to `downloads/slides/`.
-- Distribute course code privately through the course group; do not add code archives or public download links to this site.
+- Add student-facing RIP code ZIP files to `downloads/code/` and link them from `code.html`.
+- Keep stable ZIP filenames so existing website and course-group links continue to work when the source packages are refreshed.
 - Edit staff names in `data/course.json`, `staff.html`, and the footer inside each HTML page if needed.
 
 ## Deployment

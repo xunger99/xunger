@@ -74,7 +74,7 @@ function codeCard(pkg) {
     .join('');
 
   return `
-    <article class="code-card modern">
+    <article class="card code-card modern">
       <div class="code-card-head">
         <span class="kicker">Class ${esc(pkg.classNo)}</span>
         <span class="status ready">ZIP package</span>

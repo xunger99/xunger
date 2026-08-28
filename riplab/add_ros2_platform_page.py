@@ -55,9 +55,11 @@ def page_html() -> str:
       </p>
       <div class="notice">
         <strong>Code access.</strong>
-        The ROS2 package is distributed to enrolled students through the course group.
+        Download the ROS2 package here or receive it through the course group.
       </div>
       <div class="downloads">
+        <a class="download-btn" href="downloads/code/RIP_ROS2_Optional_Platform_Code.zip" download>Download ROS2 Code</a>
+        <a class="download-btn ghost" href="downloads/code/RIP_Complete_Course_Code.zip" download>Download All RIP Code</a>
         <a class="download-btn ghost" href="#quick-start">Quick Start</a>
       </div>
     </section>
@@ -134,8 +136,9 @@ def page_html() -> str:
           <code>pyserial</code>, <code>PyQt5</code>, <code>numpy</code>, and <code>matplotlib</code> on the experiment PC.
         </li>
         <li>
-          <strong>Obtain and extract the ROS2 code package.</strong>
-          Obtain the package through the course group, then open the included workspace.
+          <strong>Download and extract the ROS2 code package.</strong>
+          Download the <a href="downloads/code/RIP_ROS2_Optional_Platform_Code.zip" download>ROS2 ZIP package</a>
+          from this website or obtain it through the course group, then open the included workspace.
           <pre><code>unzip RIP_ROS2_Optional_Platform_Code.zip
 cd RIP_ROS2_Optional_Platform_Code/ros2/rip_ros2_ws</code></pre>
         </li>
