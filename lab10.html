@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Xunger@PKU</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="load.css">
+    <link rel="stylesheet" href="global.css">
+    <style>
+        ul.nomarker {
+          list-style: none;
+          margin: auto;
+          padding: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <DIV id=mw-page-base class=noprint></DIV>
+        <DIV id=mw-head-base class=noprint></DIV>
+        <div id="content" class="mw-body" role="main">
+            <div id="main">
+                <h2>Arduino 超声波测距实验</h2>
+                <h3>实验目的</h3>
+                <ol>
+                    <li>理解超声波脉冲飞行时间测距的基本原理；</li>
+                    <li>掌握 Arduino 数字脉冲的产生、计时和串口数据显示方法；</li>
+                    <li>通过标定实验认识测量范围、误差、分辨率和环境干扰。</li>
+                </ol>
+
+                <h3>预习材料</h3>
+                <ol>
+                    <li>了解 HC-SR04 模块的VCC、Trig、Echo和GND引脚功能；</li>
+                    <li>阅读 <a href="https://docs.arduino.cc/language-reference/en/functions/advanced-io/pulseIn/">Arduino pulseIn() 函数说明</a>；</li>
+                    <li>复习距离、传播速度与往返时间的关系，取室温空气中声速约343 m/s。</li>
+                </ol>
+
+                <h3>实验器材</h3>
+                Arduino UNO 或兼容开发板1块，HC-SR04超声波测距模块1个，面包板1块，USB线1条，杜邦线若干，直尺或卷尺1把，平整硬质挡板1块，安装 Arduino IDE 的笔记本电脑1台。
+
+                <h3>实验步骤</h3>
+                <ol>
+                    <li>断开 USB，按模块标识连接VCC至5 V、GND至GND，并将Trig和Echo分别连接到两个数字引脚；检查接线后再上电；</li>
+                    <li>编写程序：向Trig发送约10 μs高电平触发脉冲，使用pulseIn()测量Echo高电平持续时间，并设置合理的超时时间；</li>
+                    <li>根据“距离=Echo持续时间×声速÷2”计算距离，以厘米为单位每200 ms输出一次到串口监视器；</li>
+                    <li>将平整挡板依次放在10 cm、20 cm、40 cm、60 cm和100 cm处，每个位置记录10次测量值，计算平均值和最大偏差；</li>
+                    <li>在程序中加入5次移动平均，比较滤波前后数据波动；</li>
+                    <li>改变挡板角度或换用吸声较强的软质物体，观察丢失回波或误差增大的现象，并分析原因。</li>
+                </ol>
+
+                <h3>思考题</h3>
+                <ol>
+                    <li>距离计算公式中为什么要除以2？</li>
+                    <li>温度变化会怎样影响测距结果？</li>
+                    <li>移动平均能够减小随机波动，但会给快速变化的测量带来什么影响？</li>
+                </ol>
+
+                <h3>考核要求</h3>
+                于1周内提交实验报告，内容包括接线照片、完整程序、5个距离点的原始数据与误差表、滤波前后对比、异常回波现象分析及思考题解答。
+
+                <h3>实验索引</h3>
+                <ul class="nomarker">
+                    <li><a href="https://xunger99.github.io/xunger/ana1">模拟电路实验（一）：示波器的使用与简易传声器电路</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana2">模拟电路实验（二）：共射放大电路与差分放大电路</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana3">模拟电路实验（三）：运算放大电路</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana4">模拟电路实验（四）：Arduino驱动电机与模数转换</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig1">数字电路实验（一）：FPGA基础入门</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig2">数字电路实验（二）：FPGA中IP核的使用</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig3">数字电路实验（三）：FPGA应用实例之梳状滤波器</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab8">单片机基础与 Arduino 流水灯实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab9">Arduino PWM 信号生成与示波器测量实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab10">Arduino 超声波测距实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab11">电子元器件与 PCB 电路设计基础实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab12">STM32F446RE 定时器、编码器测速与电机闭环控制实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab13">无人机控制系统与电子电路综合实验</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <DIV id=mw-navigation>
+            <H2>Navigation menu</H2>
+            <DIV id=mw-head>
+                <DIV id=left-navigation>
+                    <DIV id=p-namespaces class=vectorTabs role=navigation aria-labelledby=p-namespaces-label>
+                        <DIV class=menu><UL></UL></DIV>
+                    </DIV>
+                </DIV>
+                <DIV id=p-cactions class="vectorMenu emptyPortlet" role=navigation aria-labelledby=p-cactions-label>
+                    <DIV class=menu><UL></UL></DIV>
+                </DIV>
+            </DIV>
+        </DIV>
+
+        <DIV id=mw-panel>
+            <DIV id=p-lang class=portal role=navigation aria-labelledby=p-lang-label>
+                <DIV id=p-logo role=banner></DIV>
+                <DIV id=p-navigation class=portal role=navigation aria-labelledby=p-navigation-label>
+                    <H3 id=p-navigation-label>Navigation</H3>
+                    <DIV class=body>
+                    <UL>
+                        <li><a href="https://xunger99.github.io/xunger/">English</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/papers.htm">Publication</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/chinese.htm">简介</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/group.htm">人才培养</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/aaero.htm">教学资源-气动声学</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/acontrol.htm">教学资源-主动控制</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/control.htm">教学资源-控制原理</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/ee.htm">教学资源-电路电子</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/flight.htm">教学资源-飞行控制</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/caa.htm">教学资源-CAA</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/sat.htm">教学资源-卫星初步</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/riplab/">教学资源-AI Enabled Control</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/undergrad.htm">教学资源-本科科研</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/outcome.htm">科研成果科普</a></li>
+                    </UL>
+                    </DIV>
+                </DIV>
+            </DIV>
+        </DIV>
+    </div>
+
+    <DIV id=footer role=contentinfo>
+        <UL id=footer-info><LI id=footer-info-lastmod> </LI></UL>
+    </DIV>
+</body>
+</html>

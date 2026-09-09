@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Xunger@PKU</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="load.css">
+    <link rel="stylesheet" href="global.css">
+    <style>
+        ul.nomarker {
+          list-style: none;
+          margin: auto;
+          padding: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <DIV id=mw-page-base class=noprint></DIV>
+        <DIV id=mw-head-base class=noprint></DIV>
+        <div id="content" class="mw-body" role="main">
+            <div id="main">
+                <h2>无人机控制系统与电子电路综合实验</h2>
+                <h3>实验目的</h3>
+                <ol>
+                    <li>认识多旋翼无人机中电源、传感器、控制器、驱动器和执行器之间的信号关系；</li>
+                    <li>掌握惯性传感器的基本读取、零偏校准和姿态变化观察方法；</li>
+                    <li>用低功率LED模拟四个电机指令，理解滚转、俯仰控制和电机混控的基本原理。</li>
+                </ol>
+
+                <h3>预习材料</h3>
+                <ol>
+                    <li>了解四旋翼无人机的机架、螺旋桨、电机、电调、飞控、惯性测量单元和电池等组成；</li>
+                    <li>复习加速度计、陀螺仪、I<sup>2</sup>C总线和PWM的基本概念；</li>
+                    <li>思考四个电机推力变化如何产生滚转和俯仰力矩。</li>
+                </ol>
+
+                <h3>实验器材</h3>
+                Arduino UNO、Nano或兼容开发板1块，MPU6050惯性传感器模块1个，面包板1块，不同颜色LED 4个，220 Ω～330 Ω电阻4个，USB线1条，杜邦线若干，硬纸板或泡沫板十字机架1个，安装 Arduino IDE 的笔记本电脑1台；可选用示波器1台。本实验不使用螺旋桨、动力电机或锂聚合物电池。
+
+                <h3>实验步骤</h3>
+                <ol>
+                    <li>在十字机架四端标记前、后、左、右电机位置，将4个LED分别作为4个电机的指令指示灯，每个LED串联限流电阻后连接到PWM引脚；</li>
+                    <li>断电连接MPU6050与开发板的电源、地、SDA和SCL，确认模块供电电压和引脚标识正确后再连接 USB；</li>
+                    <li>运行I<sup>2</sup>C设备扫描程序，确认传感器地址能够被识别；读取三轴加速度和三轴角速度，并在串口绘图器中观察静止、滚转和俯仰时的数据变化；</li>
+                    <li>将机架水平静置，采集至少200组数据计算零偏；在后续测量中减去零偏，并由加速度数据计算近似滚转角和俯仰角；</li>
+                    <li>设置相同的基础亮度模拟悬停指令。向右倾斜机架时，使右侧两个LED变亮、左侧两个LED变暗；向前倾斜时，使前侧两个LED变亮、后侧两个LED变暗；</li>
+                    <li>把滚转和俯仰修正量同时加入四路输出，限制PWM数值在0～255，验证组合倾斜时四个LED亮度变化是否符合预期；</li>
+                    <li>加入安全逻辑：传感器读取失败或数据超时后，四路输出立即归零。断开传感器信号线，验证保护是否生效；</li>
+                    <li>可选：用示波器测量一路PWM指令，比较机架水平和倾斜时的占空比。</li>
+                </ol>
+
+                <h3>思考题</h3>
+                <ol>
+                    <li>为什么实际无人机仅依靠加速度计难以获得平稳可靠的姿态角？</li>
+                    <li>若一个电机的推力偏小，飞控系统需要怎样调整其他电机的指令？</li>
+                    <li>实际飞行器还需要哪些本实验未包含的安全措施？</li>
+                </ol>
+
+                <h3>考核要求</h3>
+                于1周内提交实验报告，内容包括系统框图、接线照片、传感器原始与校准后数据、四路混控程序、不同倾斜方向下的LED或PWM结果、安全逻辑测试及思考题解答。
+
+                <h3>实验索引</h3>
+                <ul class="nomarker">
+                    <li><a href="https://xunger99.github.io/xunger/ana1">模拟电路实验（一）：示波器的使用与简易传声器电路</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana2">模拟电路实验（二）：共射放大电路与差分放大电路</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana3">模拟电路实验（三）：运算放大电路</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana4">模拟电路实验（四）：Arduino驱动电机与模数转换</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig1">数字电路实验（一）：FPGA基础入门</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig2">数字电路实验（二）：FPGA中IP核的使用</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig3">数字电路实验（三）：FPGA应用实例之梳状滤波器</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab8">单片机基础与 Arduino 流水灯实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab9">Arduino PWM 信号生成与示波器测量实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab10">Arduino 超声波测距实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab11">电子元器件与 PCB 电路设计基础实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab12">STM32F446RE 定时器、编码器测速与电机闭环控制实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab13">无人机控制系统与电子电路综合实验</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <DIV id=mw-navigation>
+            <H2>Navigation menu</H2>
+            <DIV id=mw-head>
+                <DIV id=left-navigation>
+                    <DIV id=p-namespaces class=vectorTabs role=navigation aria-labelledby=p-namespaces-label>
+                        <DIV class=menu><UL></UL></DIV>
+                    </DIV>
+                </DIV>
+                <DIV id=p-cactions class="vectorMenu emptyPortlet" role=navigation aria-labelledby=p-cactions-label>
+                    <DIV class=menu><UL></UL></DIV>
+                </DIV>
+            </DIV>
+        </DIV>
+
+        <DIV id=mw-panel>
+            <DIV id=p-lang class=portal role=navigation aria-labelledby=p-lang-label>
+                <DIV id=p-logo role=banner></DIV>
+                <DIV id=p-navigation class=portal role=navigation aria-labelledby=p-navigation-label>
+                    <H3 id=p-navigation-label>Navigation</H3>
+                    <DIV class=body>
+                    <UL>
+                        <li><a href="https://xunger99.github.io/xunger/">English</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/papers.htm">Publication</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/chinese.htm">简介</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/group.htm">人才培养</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/aaero.htm">教学资源-气动声学</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/acontrol.htm">教学资源-主动控制</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/control.htm">教学资源-控制原理</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/ee.htm">教学资源-电路电子</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/flight.htm">教学资源-飞行控制</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/caa.htm">教学资源-CAA</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/sat.htm">教学资源-卫星初步</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/riplab/">教学资源-AI Enabled Control</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/undergrad.htm">教学资源-本科科研</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/outcome.htm">科研成果科普</a></li>
+                    </UL>
+                    </DIV>
+                </DIV>
+            </DIV>
+        </DIV>
+    </div>
+
+    <DIV id=footer role=contentinfo>
+        <UL id=footer-info><LI id=footer-info-lastmod> </LI></UL>
+    </DIV>
+</body>
+</html>

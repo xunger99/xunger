@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Xunger@PKU</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="load.css">
+    <link rel="stylesheet" href="global.css">
+    <style>
+        ul.nomarker {
+          list-style: none;
+          margin: auto;
+          padding: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <DIV id=mw-page-base class=noprint></DIV>
+        <DIV id=mw-head-base class=noprint></DIV>
+        <div id="content" class="mw-body" role="main">
+            <div id="main">
+                <h2>STM32F446RE 定时器、编码器测速与电机闭环控制实验</h2>
+                <h3>实验目的</h3>
+                <ol>
+                    <li>了解 STM32F446RE 定时器的计数、编码器接口和PWM输出功能；</li>
+                    <li>掌握由增量式编码器脉冲计算直流电机转速的方法；</li>
+                    <li>理解反馈闭环的基本概念，实现简单的比例转速控制。</li>
+                </ol>
+
+                <h3>预习材料</h3>
+                <ol>
+                    <li>阅读 <a href="https://www.st.com/en/evaluation-tools/nucleo-f446re.html">NUCLEO-F446RE 开发板介绍</a>，了解板载调试器和扩展引脚；</li>
+                    <li>查阅所用减速电机与编码器的数据手册，确认额定电压、每转脉冲数和输出电平；</li>
+                    <li>复习PWM调速、增量式正交编码器、采样周期和比例控制的基本概念。</li>
+                </ol>
+
+                <h3>实验器材</h3>
+                NUCLEO-F446RE开发板1块，带正交编码器的小型直流减速电机1个，TB6612FNG或同类低压电机驱动模块1个，与电机额定电压匹配且有限流功能的直流电源1台，USB线1条，面包板1块，杜邦线若干，万用表1个，安装 STM32CubeIDE 的笔记本电脑1台。
+
+                <h3>实验步骤</h3>
+                <ol>
+                    <li>确认电机和编码器参数。实验过程中电机由独立低压电源供电，不得直接由开发板供电；电机驱动模块、编码器和开发板必须共地；</li>
+                    <li>在 STM32CubeIDE 中建立工程，将一个定时器设置为编码器模式，另一个定时器设置为PWM输出，再设置一个固定周期（建议100 ms）的测速任务；</li>
+                    <li>先不接通电机电源，手动缓慢转动电机轴，读取计数器增减方向和计数值，验证编码器A、B相接线正确；</li>
+                    <li>连接电机驱动模块。固定电机并确保转轴周围没有松动物体，从低占空比开始测试正转、反转和停止；</li>
+                    <li>每个采样周期读取编码器计数增量，根据每转计数和采样时间计算转速，将计数增量、转速和PWM占空比输出到串口；</li>
+                    <li>分别设置20%、40%、60%和80%的固定占空比，待转速稳定后记录数据，绘制占空比与稳态转速关系；</li>
+                    <li>实现比例闭环控制：根据“目标转速－实测转速”的误差调整PWM，并对输出限制在安全范围内。从较小比例系数开始逐步调节；</li>
+                    <li>选择两组目标转速，记录启动至稳定的响应数据；轻触电机负载或改变电源限流设置，比较开环与闭环的转速恢复能力。</li>
+                </ol>
+
+                <h3>思考题</h3>
+                <ol>
+                    <li>采样周期过长或过短分别会给测速带来什么问题？</li>
+                    <li>比例系数过小时响应会怎样，过大时又可能出现什么现象？</li>
+                    <li>为什么需要限制PWM输出并设置电机的安全转速范围？</li>
+                </ol>
+
+                <h3>考核要求</h3>
+                于1周内提交实验报告，内容包括系统接线图、定时器配置、测速和控制程序、开环标定数据、两组闭环响应曲线、开环与闭环抗扰动对比及思考题解答。
+
+                <h3>实验索引</h3>
+                <ul class="nomarker">
+                    <li><a href="https://xunger99.github.io/xunger/ana1">模拟电路实验（一）：示波器的使用与简易传声器电路</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana2">模拟电路实验（二）：共射放大电路与差分放大电路</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana3">模拟电路实验（三）：运算放大电路</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana4">模拟电路实验（四）：Arduino驱动电机与模数转换</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig1">数字电路实验（一）：FPGA基础入门</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig2">数字电路实验（二）：FPGA中IP核的使用</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig3">数字电路实验（三）：FPGA应用实例之梳状滤波器</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab8">单片机基础与 Arduino 流水灯实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab9">Arduino PWM 信号生成与示波器测量实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab10">Arduino 超声波测距实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab11">电子元器件与 PCB 电路设计基础实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab12">STM32F446RE 定时器、编码器测速与电机闭环控制实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab13">无人机控制系统与电子电路综合实验</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <DIV id=mw-navigation>
+            <H2>Navigation menu</H2>
+            <DIV id=mw-head>
+                <DIV id=left-navigation>
+                    <DIV id=p-namespaces class=vectorTabs role=navigation aria-labelledby=p-namespaces-label>
+                        <DIV class=menu><UL></UL></DIV>
+                    </DIV>
+                </DIV>
+                <DIV id=p-cactions class="vectorMenu emptyPortlet" role=navigation aria-labelledby=p-cactions-label>
+                    <DIV class=menu><UL></UL></DIV>
+                </DIV>
+            </DIV>
+        </DIV>
+
+        <DIV id=mw-panel>
+            <DIV id=p-lang class=portal role=navigation aria-labelledby=p-lang-label>
+                <DIV id=p-logo role=banner></DIV>
+                <DIV id=p-navigation class=portal role=navigation aria-labelledby=p-navigation-label>
+                    <H3 id=p-navigation-label>Navigation</H3>
+                    <DIV class=body>
+                    <UL>
+                        <li><a href="https://xunger99.github.io/xunger/">English</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/papers.htm">Publication</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/chinese.htm">简介</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/group.htm">人才培养</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/aaero.htm">教学资源-气动声学</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/acontrol.htm">教学资源-主动控制</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/control.htm">教学资源-控制原理</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/ee.htm">教学资源-电路电子</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/flight.htm">教学资源-飞行控制</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/caa.htm">教学资源-CAA</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/sat.htm">教学资源-卫星初步</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/riplab/">教学资源-AI Enabled Control</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/undergrad.htm">教学资源-本科科研</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/outcome.htm">科研成果科普</a></li>
+                    </UL>
+                    </DIV>
+                </DIV>
+            </DIV>
+        </DIV>
+    </div>
+
+    <DIV id=footer role=contentinfo>
+        <UL id=footer-info><LI id=footer-info-lastmod> </LI></UL>
+    </DIV>
+</body>
+</html>

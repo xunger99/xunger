@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Xunger@PKU</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="load.css">
+    <link rel="stylesheet" href="global.css">
+    <style>
+        ul.nomarker {
+          list-style: none;
+          margin: auto;
+          padding: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <DIV id=mw-page-base class=noprint></DIV>
+        <DIV id=mw-head-base class=noprint></DIV>
+        <div id="content" class="mw-body" role="main">
+            <div id="main">
+                <h2>单片机基础与 Arduino 流水灯实验</h2>
+                <h3>实验目的</h3>
+                <ol>
+                    <li>了解单片机的基本组成，认识数字输入、数字输出、电源和接地引脚；</li>
+                    <li>掌握 Arduino IDE 的基本使用方法，完成程序编译、下载与串口调试；</li>
+                    <li>学习 LED 限流电路和顺序控制方法，实现可调速度的流水灯。</li>
+                </ol>
+
+                <h3>预习材料</h3>
+                <ol>
+                    <li>阅读 <a href="https://docs.arduino.cc/hardware/uno-rev3/">Arduino UNO Rev3 硬件介绍</a>，了解开发板的主要引脚；</li>
+                    <li>阅读 <a href="https://docs.arduino.cc/built-in-examples/basics/Blink/">Arduino Blink 示例</a>，了解数字输出和程序基本结构；</li>
+                    <li>复习 LED 的极性、正向压降及限流电阻的计算方法。</li>
+                </ol>
+
+                <h3>实验器材</h3>
+                Arduino UNO 或兼容开发板1块，面包板1块，LED 4个，220 Ω～330 Ω电阻4个，10 kΩ电位器1个，USB线1条，杜邦线若干，万用表1个，安装 Arduino IDE 的笔记本电脑1台。
+
+                <h3>实验步骤</h3>
+                <ol>
+                    <li>断电搭建电路：将4个 LED 的阳极分别经限流电阻连接至4个数字引脚，阴极接 Arduino GND。用万用表确认没有电源与地短路后再连接 USB；</li>
+                    <li>打开 Arduino IDE，选择正确的开发板和串口，运行 Blink 示例，确认程序能够编译、下载且板载 LED 正常闪烁；</li>
+                    <li>编写程序，将4个 LED 对应的引脚配置为输出，使 LED 按顺序依次点亮，每次只点亮1个 LED，形成流水灯效果；</li>
+                    <li>修改程序，分别设置100 ms、300 ms和600 ms的切换间隔，观察并记录流水速度变化；</li>
+                    <li>将电位器两端接5 V和GND，滑动端接A0。读取模拟量并将其映射为100 ms～1000 ms的延时，实现旋钮调速；</li>
+                    <li>通过串口监视器输出A0读数和当前延时，检查旋钮位置、数值和流水速度是否一致。</li>
+                </ol>
+
+                <h3>思考题</h3>
+                <ol>
+                    <li>为什么每个 LED 都必须串联限流电阻？电阻过小或过大分别会产生什么影响？</li>
+                    <li>使用阻塞式延时控制流水灯时，单片机还能否及时处理其他任务？可以怎样改进？</li>
+                    <li>如果要扩展到8个 LED，需要修改程序中的哪些部分？</li>
+                </ol>
+
+                <h3>考核要求</h3>
+                于1周内提交实验报告，内容包括电路连接照片、流水灯程序、三种固定速度和旋钮调速的实验现象、串口数据记录及思考题解答。
+
+                <h3>实验索引</h3>
+                <ul class="nomarker">
+                    <li><a href="https://xunger99.github.io/xunger/ana1">模拟电路实验（一）：示波器的使用与简易传声器电路</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana2">模拟电路实验（二）：共射放大电路与差分放大电路</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana3">模拟电路实验（三）：运算放大电路</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana4">模拟电路实验（四）：Arduino驱动电机与模数转换</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig1">数字电路实验（一）：FPGA基础入门</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig2">数字电路实验（二）：FPGA中IP核的使用</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig3">数字电路实验（三）：FPGA应用实例之梳状滤波器</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab8">单片机基础与 Arduino 流水灯实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab9">Arduino PWM 信号生成与示波器测量实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab10">Arduino 超声波测距实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab11">电子元器件与 PCB 电路设计基础实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab12">STM32F446RE 定时器、编码器测速与电机闭环控制实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab13">无人机控制系统与电子电路综合实验</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <DIV id=mw-navigation>
+            <H2>Navigation menu</H2>
+            <DIV id=mw-head>
+                <DIV id=left-navigation>
+                    <DIV id=p-namespaces class=vectorTabs role=navigation aria-labelledby=p-namespaces-label>
+                        <DIV class=menu><UL></UL></DIV>
+                    </DIV>
+                </DIV>
+                <DIV id=p-cactions class="vectorMenu emptyPortlet" role=navigation aria-labelledby=p-cactions-label>
+                    <DIV class=menu><UL></UL></DIV>
+                </DIV>
+            </DIV>
+        </DIV>
+
+        <DIV id=mw-panel>
+            <DIV id=p-lang class=portal role=navigation aria-labelledby=p-lang-label>
+                <DIV id=p-logo role=banner></DIV>
+                <DIV id=p-navigation class=portal role=navigation aria-labelledby=p-navigation-label>
+                    <H3 id=p-navigation-label>Navigation</H3>
+                    <DIV class=body>
+                    <UL>
+                        <li><a href="https://xunger99.github.io/xunger/">English</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/papers.htm">Publication</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/chinese.htm">简介</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/group.htm">人才培养</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/aaero.htm">教学资源-气动声学</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/acontrol.htm">教学资源-主动控制</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/control.htm">教学资源-控制原理</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/ee.htm">教学资源-电路电子</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/flight.htm">教学资源-飞行控制</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/caa.htm">教学资源-CAA</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/sat.htm">教学资源-卫星初步</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/riplab/">教学资源-AI Enabled Control</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/undergrad.htm">教学资源-本科科研</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/outcome.htm">科研成果科普</a></li>
+                    </UL>
+                    </DIV>
+                </DIV>
+            </DIV>
+        </DIV>
+    </div>
+
+    <DIV id=footer role=contentinfo>
+        <UL id=footer-info><LI id=footer-info-lastmod> </LI></UL>
+    </DIV>
+</body>
+</html>

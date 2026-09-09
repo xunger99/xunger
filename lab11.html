@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Xunger@PKU</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="load.css">
+    <link rel="stylesheet" href="global.css">
+    <style>
+        ul.nomarker {
+          list-style: none;
+          margin: auto;
+          padding: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <DIV id=mw-page-base class=noprint></DIV>
+        <DIV id=mw-head-base class=noprint></DIV>
+        <div id="content" class="mw-body" role="main">
+            <div id="main">
+                <h2>电子元器件与 PCB 电路设计基础实验</h2>
+                <h3>实验目的</h3>
+                <ol>
+                    <li>认识电阻、电容、二极管、LED、按键和连接器等常用元器件；</li>
+                    <li>学习从电路原理图到PCB布局布线的基本流程；</li>
+                    <li>掌握电气规则检查、设计规则检查和生产文件导出的基本方法。</li>
+                </ol>
+
+                <h3>预习材料</h3>
+                <ol>
+                    <li>阅读 <a href="https://docs.kicad.org/">KiCad 官方文档</a>中的原理图编辑器和PCB编辑器入门内容；</li>
+                    <li>复习电阻色环、LED极性、电容容值和耐压等元器件标识；</li>
+                    <li>了解原理图符号、PCB封装、网络、焊盘、过孔和覆铜的含义。</li>
+                </ol>
+
+                <h3>实验器材</h3>
+                安装 KiCad 的笔记本电脑1台，面包板1块，5 V直流电源或Arduino开发板1块，LED 2个，220 Ω～1 kΩ电阻若干，按键1个，10 kΩ电阻1个，常用小电容若干，万用表1个，杜邦线若干。
+
+                <h3>实验步骤</h3>
+                <ol>
+                    <li>根据元器件外观和标识完成分类，用万用表测量至少3只电阻的实际阻值，比较标称值与测量值；</li>
+                    <li>在面包板上搭建5 V供电的按键控制LED电路，计算限流电阻，检查LED极性并验证电路功能；</li>
+                    <li>在 KiCad 中新建工程，绘制同一电路的原理图，标注元件编号和参数，并添加电源、地及输入输出连接器；</li>
+                    <li>为每个符号选择与实物相符的通孔封装，运行电气规则检查（ERC），修正未连接或引脚类型等问题；</li>
+                    <li>将元件更新到PCB，绘制不大于50 mm×50 mm的板框。先放置连接器和按键，再放置LED和电阻，使器件方向与标识便于使用；</li>
+                    <li>设置合理的线宽和安全间距，完成单面或双面布线，添加GND覆铜并运行设计规则检查（DRC）；</li>
+                    <li>使用3D查看器检查元件方向，最后导出 Gerber 和钻孔文件，并核对文件是否包含铜层、阻焊层、丝印层、板框和钻孔层。</li>
+                </ol>
+
+                <h3>思考题</h3>
+                <ol>
+                    <li>原理图符号与PCB封装有什么区别？选错封装会造成什么后果？</li>
+                    <li>为什么电源线通常需要比普通信号线更宽？</li>
+                    <li>按键输入端为什么常使用上拉或下拉电阻？</li>
+                </ol>
+
+                <h3>考核要求</h3>
+                于1周内提交实验报告和工程文件，内容包括元器件测量记录、面包板电路照片、原理图、PCB正反面截图、ERC与DRC通过截图、Gerber文件及思考题解答。
+
+                <h3>实验索引</h3>
+                <ul class="nomarker">
+                    <li><a href="https://xunger99.github.io/xunger/ana1">模拟电路实验（一）：示波器的使用与简易传声器电路</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana2">模拟电路实验（二）：共射放大电路与差分放大电路</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana3">模拟电路实验（三）：运算放大电路</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana4">模拟电路实验（四）：Arduino驱动电机与模数转换</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig1">数字电路实验（一）：FPGA基础入门</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig2">数字电路实验（二）：FPGA中IP核的使用</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig3">数字电路实验（三）：FPGA应用实例之梳状滤波器</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab8">单片机基础与 Arduino 流水灯实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab9">Arduino PWM 信号生成与示波器测量实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab10">Arduino 超声波测距实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab11">电子元器件与 PCB 电路设计基础实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab12">STM32F446RE 定时器、编码器测速与电机闭环控制实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab13">无人机控制系统与电子电路综合实验</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <DIV id=mw-navigation>
+            <H2>Navigation menu</H2>
+            <DIV id=mw-head>
+                <DIV id=left-navigation>
+                    <DIV id=p-namespaces class=vectorTabs role=navigation aria-labelledby=p-namespaces-label>
+                        <DIV class=menu><UL></UL></DIV>
+                    </DIV>
+                </DIV>
+                <DIV id=p-cactions class="vectorMenu emptyPortlet" role=navigation aria-labelledby=p-cactions-label>
+                    <DIV class=menu><UL></UL></DIV>
+                </DIV>
+            </DIV>
+        </DIV>
+
+        <DIV id=mw-panel>
+            <DIV id=p-lang class=portal role=navigation aria-labelledby=p-lang-label>
+                <DIV id=p-logo role=banner></DIV>
+                <DIV id=p-navigation class=portal role=navigation aria-labelledby=p-navigation-label>
+                    <H3 id=p-navigation-label>Navigation</H3>
+                    <DIV class=body>
+                    <UL>
+                        <li><a href="https://xunger99.github.io/xunger/">English</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/papers.htm">Publication</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/chinese.htm">简介</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/group.htm">人才培养</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/aaero.htm">教学资源-气动声学</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/acontrol.htm">教学资源-主动控制</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/control.htm">教学资源-控制原理</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/ee.htm">教学资源-电路电子</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/flight.htm">教学资源-飞行控制</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/caa.htm">教学资源-CAA</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/sat.htm">教学资源-卫星初步</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/riplab/">教学资源-AI Enabled Control</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/undergrad.htm">教学资源-本科科研</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/outcome.htm">科研成果科普</a></li>
+                    </UL>
+                    </DIV>
+                </DIV>
+            </DIV>
+        </DIV>
+    </div>
+
+    <DIV id=footer role=contentinfo>
+        <UL id=footer-info><LI id=footer-info-lastmod> </LI></UL>
+    </DIV>
+</body>
+</html>

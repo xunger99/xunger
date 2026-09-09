@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Xunger@PKU</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="load.css">
+    <link rel="stylesheet" href="global.css">
+    <style>
+        ul.nomarker {
+          list-style: none;
+          margin: auto;
+          padding: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <DIV id=mw-page-base class=noprint></DIV>
+        <DIV id=mw-head-base class=noprint></DIV>
+        <div id="content" class="mw-body" role="main">
+            <div id="main">
+                <h2>Arduino PWM 信号生成与示波器测量实验</h2>
+                <h3>实验目的</h3>
+                <ol>
+                    <li>理解脉宽调制（PWM）的周期、频率和占空比等基本概念；</li>
+                    <li>掌握 Arduino PWM 输出的编程方法；</li>
+                    <li>学习用示波器测量低压数字信号，并比较程序设定值与实测值。</li>
+                </ol>
+
+                <h3>预习材料</h3>
+                <ol>
+                    <li>阅读 <a href="https://docs.arduino.cc/learn/microcontrollers/analog-output/">Arduino PWM 基础</a>，了解 analogWrite() 的功能；</li>
+                    <li>复习示波器探头、时基、触发、电压档位和占空比自动测量功能；</li>
+                    <li>思考 PWM 信号为何能够用于调节 LED 平均亮度和直流电机平均功率。</li>
+                </ol>
+
+                <h3>实验器材</h3>
+                Arduino UNO 或兼容开发板1块，示波器1台及探头1支，面包板1块，LED 1个，220 Ω～330 Ω电阻1个，10 kΩ电位器1个，USB线1条，杜邦线若干，安装 Arduino IDE 的笔记本电脑1台。
+
+                <h3>实验步骤</h3>
+                <ol>
+                    <li>将 LED 与限流电阻串联后接到 Arduino 的一个 PWM 引脚和GND，确认接线正确后连接 USB；</li>
+                    <li>编写程序，依次执行 analogWrite() 输出值0、64、128、192和255，每种状态保持约3 s，观察 LED 亮度；</li>
+                    <li>示波器探头尖端接 PWM 引脚，地夹接 Arduino GND。严禁将地夹接到其他带电节点；调整电压档位、时基和触发，使波形稳定显示；</li>
+                    <li>测量每种输出值对应的高、低电平，记录周期、频率和占空比，计算理论占空比“输出值/255×100%”并比较误差；</li>
+                    <li>将电位器两端接5 V和GND，滑动端接A0。把A0读数映射到0～255并实时更新 PWM，占空比应随旋钮连续变化；</li>
+                    <li>使用示波器的平均值或直流测量功能记录不同占空比下的平均电压，说明平均电压与占空比的关系。</li>
+                </ol>
+
+                <h3>思考题</h3>
+                <ol>
+                    <li>analogWrite(128) 是否会输出稳定的2.5 V直流电压？为什么？</li>
+                    <li>PWM频率保持不变时，占空比改变会影响哪些测量量？</li>
+                    <li>若要得到较平滑的直流电压，可以在PWM输出端增加什么简单电路？</li>
+                </ol>
+
+                <h3>考核要求</h3>
+                于1周内提交实验报告，内容包括程序代码、接线照片、至少5组PWM波形截图、理论与实测占空比表格、平均电压分析及思考题解答。
+
+                <h3>实验索引</h3>
+                <ul class="nomarker">
+                    <li><a href="https://xunger99.github.io/xunger/ana1">模拟电路实验（一）：示波器的使用与简易传声器电路</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana2">模拟电路实验（二）：共射放大电路与差分放大电路</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana3">模拟电路实验（三）：运算放大电路</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/ana4">模拟电路实验（四）：Arduino驱动电机与模数转换</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig1">数字电路实验（一）：FPGA基础入门</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig2">数字电路实验（二）：FPGA中IP核的使用</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/dig3">数字电路实验（三）：FPGA应用实例之梳状滤波器</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab8">单片机基础与 Arduino 流水灯实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab9">Arduino PWM 信号生成与示波器测量实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab10">Arduino 超声波测距实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab11">电子元器件与 PCB 电路设计基础实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab12">STM32F446RE 定时器、编码器测速与电机闭环控制实验</a></li>
+                    <li><a href="https://xunger99.github.io/xunger/lab13">无人机控制系统与电子电路综合实验</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <DIV id=mw-navigation>
+            <H2>Navigation menu</H2>
+            <DIV id=mw-head>
+                <DIV id=left-navigation>
+                    <DIV id=p-namespaces class=vectorTabs role=navigation aria-labelledby=p-namespaces-label>
+                        <DIV class=menu><UL></UL></DIV>
+                    </DIV>
+                </DIV>
+                <DIV id=p-cactions class="vectorMenu emptyPortlet" role=navigation aria-labelledby=p-cactions-label>
+                    <DIV class=menu><UL></UL></DIV>
+                </DIV>
+            </DIV>
+        </DIV>
+
+        <DIV id=mw-panel>
+            <DIV id=p-lang class=portal role=navigation aria-labelledby=p-lang-label>
+                <DIV id=p-logo role=banner></DIV>
+                <DIV id=p-navigation class=portal role=navigation aria-labelledby=p-navigation-label>
+                    <H3 id=p-navigation-label>Navigation</H3>
+                    <DIV class=body>
+                    <UL>
+                        <li><a href="https://xunger99.github.io/xunger/">English</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/papers.htm">Publication</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/chinese.htm">简介</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/group.htm">人才培养</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/aaero.htm">教学资源-气动声学</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/acontrol.htm">教学资源-主动控制</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/control.htm">教学资源-控制原理</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/ee.htm">教学资源-电路电子</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/flight.htm">教学资源-飞行控制</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/caa.htm">教学资源-CAA</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/sat.htm">教学资源-卫星初步</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/riplab/">教学资源-AI Enabled Control</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/undergrad.htm">教学资源-本科科研</a></li>
+                        <li><a href="https://xunger99.github.io/xunger/outcome.htm">科研成果科普</a></li>
+                    </UL>
+                    </DIV>
+                </DIV>
+            </DIV>
+        </DIV>
+    </div>
+
+    <DIV id=footer role=contentinfo>
+        <UL id=footer-info><LI id=footer-info-lastmod> </LI></UL>
+    </DIV>
+</body>
+</html>
